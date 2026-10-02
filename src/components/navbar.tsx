@@ -21,26 +21,22 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed top-5 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+    <header className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
       <nav
         aria-label="Primary Navigation"
         className={cn(
-          "pointer-events-auto flex items-center gap-1.5 p-1.5",
-          "rounded-full border border-[#C8C5D0]/40 bg-[#FAF8FD]/90 backdrop-blur-xl",
-          "shadow-sm ring-1 ring-black/5",
-          "transition-all duration-200"
+          "pointer-events-auto flex items-center justify-between gap-4 sm:gap-8 px-4 py-2",
+          "rounded-full border border-[#C8C5D0]/40 bg-[#FAF9FD]/95 backdrop-blur-md",
+          "shadow-xs transition-all duration-200"
         )}
       >
-        {/* Brand / Name */}
+        {/* Brand / Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 pl-3.5 pr-2 py-1.5 text-xs font-mono tracking-wider uppercase text-[#1D1B20] hover:text-[#5954A8] transition-colors"
+          className="text-xs font-semibold tracking-tight text-[#1B1B1F] hover:text-[#5954A8] transition-colors shrink-0"
         >
-          <span className="w-2 h-2 rounded-full bg-[#5954A8]" />
-          <span className="font-semibold text-xs text-[#1D1B20]">Sumukha</span>
+          Sumukha Upadhyaya
         </Link>
-
-        <div className="h-3.5 w-px bg-[#C8C5D0]/60 mx-1" />
 
         {/* Navigation Links */}
         <ul className="flex items-center gap-1 m-0 p-0 list-none">
@@ -55,10 +51,10 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   className={cn(
-                    "relative flex items-center px-3.5 py-1.5 rounded-full text-xs font-medium tracking-normal transition-all duration-200",
+                    "relative px-3 py-1 rounded-full text-xs font-medium transition-all duration-150",
                     isActive
                       ? "bg-[#E3DFFF] text-[#140E62] font-semibold"
-                      : "text-[#49454F] hover:text-[#1D1B20] hover:bg-[#EEEBF2]"
+                      : "text-[#46464F] hover:text-[#1B1B1F] hover:bg-[#F4F2F7]"
                   )}
                 >
                   <span>{item.label}</span>
@@ -68,10 +64,8 @@ export function Navbar() {
           })}
         </ul>
 
-        <div className="h-3.5 w-px bg-[#C8C5D0]/60 mx-1" />
-
         {/* Resume Trigger */}
-        <div className="pl-0.5 pr-1">
+        <div className="shrink-0">
           <ResumeModal />
         </div>
       </nav>

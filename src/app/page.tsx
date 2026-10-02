@@ -7,7 +7,8 @@ import {
   personalInfo, 
   projectList, 
   gardenNotes, 
-  experienceList 
+  experienceList,
+  educationList
 } from "@/data/portfolio-data";
 
 export default function Home() {
@@ -23,46 +24,40 @@ export default function Home() {
       case "Evergreen":
         return "border-[#C7BFFF]/50 bg-[#E3DFFF] text-[#140E62]";
       default:
-        return "border-[#C8C5D0] bg-[#EEEBF2] text-[#1D1B20]";
+        return "border-[#C8C5D0] bg-[#EEEBF2] text-[#1B1B1F]";
     }
   };
 
   return (
-    <div className="flex flex-col gap-16 py-6">
-      {/* Hero Section */}
-      <section className="flex flex-col items-start gap-6">
-        <div className="flex flex-col gap-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#C7BFFF]/50 bg-[#E3DFFF] text-xs font-mono text-[#140E62] font-semibold w-fit">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#5954A8]" />
-            <span>Sumukha Upadhyaya • Software Engineer</span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#1D1B20] leading-tight font-sans">
-            Building systems, distributed infrastructure, and web applications.
+    <div className="flex flex-col gap-24 py-4">
+      {/* Hero Section — Auxia-inspired high-impact typography and clean pacing */}
+      <section className="flex flex-col items-start gap-8 pt-4 sm:pt-8">
+        <div className="flex flex-col gap-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#1B1B1F] leading-[1.08] font-sans">
+            Systems runtimes, distributed backends, and reliable web infrastructure.
           </h1>
+          <p className="text-lg sm:text-xl text-[#46464F] leading-relaxed font-normal pt-2">
+            I am <span className="font-semibold text-[#1B1B1F]">Sumukha Upadhyaya</span>, a software engineering student at <span className="font-semibold text-[#1B1B1F]">RVCE</span> (9.69 CGPA) and <span className="font-semibold text-[#1B1B1F]">IIT Madras</span> (9.15 GPA). Previously engineering access control and BigQuery ingestion pipelines at <span className="font-semibold text-[#1B1B1F]">Auxia</span>, and multi-tenant platforms at <span className="font-semibold text-[#1B1B1F]">FindInbox</span>.
+          </p>
         </div>
 
-        <p className="text-base sm:text-lg text-[#49454F] leading-relaxed max-w-2xl font-normal">
-          I am a software engineering undergraduate at <span className="font-semibold text-[#1D1B20]">RVCE</span> (9.69 CGPA) concurrently pursuing a BS in Data Science at <span className="font-semibold text-[#1D1B20]">IIT Madras</span> (9.15 GPA). Previously Software Engineering Intern at <span className="font-semibold text-[#1D1B20]">Auxia</span> and Full Stack Developer Intern at <span className="font-semibold text-[#1D1B20]">FindInbox</span>.
-        </p>
-
-        {/* Action Controls in Material 3 Expressive Tonal Pills */}
-        <div className="flex flex-wrap items-center gap-3 pt-1">
+        {/* Action Controls */}
+        <div className="flex flex-wrap items-center gap-3">
           <Link
             href="/projects"
             className={cn(
               buttonVariants({ variant: "default" }),
-              "rounded-full bg-[#5954A8] text-white hover:bg-[#4B4699] transition-all px-5 py-2 text-xs font-medium cursor-pointer shadow-xs"
+              "rounded-full bg-[#5954A8] text-white hover:bg-[#4B4699] transition-all px-6 py-2.5 text-xs font-semibold cursor-pointer shadow-xs"
             )}
           >
-            <span>View Projects &rarr;</span>
+            <span>Explore Systems &rarr;</span>
           </Link>
 
           <Link
             href="/blogs"
             className={cn(
               buttonVariants({ variant: "outline" }),
-              "rounded-full border-[#C7BFFF]/60 bg-[#E3DFFF] text-[#140E62] hover:bg-[#D5CEFF] transition-all px-5 py-2 text-xs font-medium cursor-pointer"
+              "rounded-full border-[#C7BFFF]/60 bg-[#E3DFFF] text-[#140E62] hover:bg-[#D5CEFF] transition-all px-6 py-2.5 text-xs font-semibold cursor-pointer"
             )}
           >
             <span>Engineering Notes &rarr;</span>
@@ -70,58 +65,90 @@ export default function Home() {
 
           <a
             href={`mailto:${personalInfo.email}`}
-            className="rounded-full border border-[#C8C5D0]/60 bg-white text-[#1D1B20] hover:bg-[#F4F2F8] px-5 py-2 text-xs font-mono transition-colors"
+            className="rounded-full border border-[#C8C5D0]/60 bg-white text-[#1B1B1F] hover:bg-[#F4F2F7] px-6 py-2.5 text-xs font-mono transition-colors"
           >
             {personalInfo.email}
           </a>
         </div>
 
-        {/* Key Credentials Strip */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full mt-4 pt-6 border-t border-[#C8C5D0]/30">
-          <div className="flex flex-col gap-0.5 p-4 rounded-3xl bg-[#F4F2F8] border border-[#C8C5D0]/30">
-            <span className="text-[11px] font-mono text-[#635F6A] uppercase tracking-wider">RVCE B.E.</span>
-            <span className="text-xl font-bold text-[#1D1B20]">9.69 <span className="text-xs text-[#635F6A] font-normal font-mono">CGPA</span></span>
+        {/* Auxia-inspired Systems Architecture Pipeline */}
+        <div className="w-full mt-4 p-6 sm:p-8 rounded-3xl bg-[#F4F2F7] border border-[#C8C5D0]/30 flex flex-col gap-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#C8C5D0]/30 pb-4">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-widest text-[#5954A8] font-bold">
+                Systems Execution Architecture
+              </span>
+              <h2 className="text-base sm:text-lg font-bold text-[#1B1B1F] mt-0.5">
+                From userspace syscall interception to zero-allocation distributed evaluation
+              </h2>
+            </div>
+            <span className="text-xs font-mono text-[#635F6A] shrink-0">
+              PRODUCTION TELEMETRY
+            </span>
           </div>
-          <div className="flex flex-col gap-0.5 p-4 rounded-3xl bg-[#F4F2F8] border border-[#C8C5D0]/30">
-            <span className="text-[11px] font-mono text-[#635F6A] uppercase tracking-wider">IIT Madras BS</span>
-            <span className="text-xl font-bold text-[#5954A8]">9.15 <span className="text-xs text-[#635F6A] font-normal font-mono">GPA</span></span>
-          </div>
-          <div className="flex flex-col gap-0.5 p-4 rounded-3xl bg-[#F4F2F8] border border-[#C8C5D0]/30">
-            <span className="text-[11px] font-mono text-[#635F6A] uppercase tracking-wider">GitHub</span>
-            <span className="text-xl font-bold text-[#1D1B20]">50+ <span className="text-xs text-[#635F6A] font-normal font-mono">Repos</span></span>
-          </div>
-          <div className="flex flex-col gap-0.5 p-4 rounded-3xl bg-[#F4F2F8] border border-[#C8C5D0]/30">
-            <span className="text-[11px] font-mono text-[#635F6A] uppercase tracking-wider">Internships</span>
-            <span className="text-xl font-bold text-[#7A5368]">3 <span className="text-xs text-[#635F6A] font-normal font-mono">Completed</span></span>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="flex flex-col gap-2 p-4 rounded-2xl bg-white border border-[#C8C5D0]/20 shadow-xs">
+              <span className="text-[11px] font-mono text-[#5954A8] font-bold">STAGE 01</span>
+              <h3 className="text-sm font-bold text-[#1B1B1F]">Syscall Interception</h3>
+              <p className="text-xs text-[#46464F] leading-relaxed">
+                Linux ptrace attaches to execution boundaries to observe tracee state without kernel module crash risks.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 p-4 rounded-2xl bg-white border border-[#C8C5D0]/20 shadow-xs">
+              <span className="text-[11px] font-mono text-[#5954A8] font-bold">STAGE 02</span>
+              <h3 className="text-sm font-bold text-[#1B1B1F]">Register Decoding</h3>
+              <p className="text-xs text-[#46464F] leading-relaxed">
+                Decodes x86_64 System V ABI registers (orig_rax, rdi, rsi) to reconstruct cross-process memory strings.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 p-4 rounded-2xl bg-white border border-[#C8C5D0]/20 shadow-xs">
+              <span className="text-[11px] font-mono text-[#5954A8] font-bold">STAGE 03</span>
+              <h3 className="text-sm font-bold text-[#1B1B1F]">Zero-Allocation Eval</h3>
+              <p className="text-xs text-[#46464F] leading-relaxed">
+                Memory-mapped caches and sync.Pool buffer reuse evaluate feature flags in sub-microsecond critical paths.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 p-4 rounded-2xl bg-white border border-[#C8C5D0]/20 shadow-xs">
+              <span className="text-[11px] font-mono text-[#5954A8] font-bold">STAGE 04</span>
+              <h3 className="text-sm font-bold text-[#1B1B1F]">Production Rollout</h3>
+              <p className="text-xs text-[#46464F] leading-relaxed">
+                Live database migrations with backward compatibility and BigQuery self-serve RPC ingestion.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Projects Showcase */}
-      <section className="flex flex-col gap-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight text-[#1D1B20] font-sans">Featured Work</h2>
-            <p className="text-xs font-mono text-[#635F6A] mt-0.5">Production codebases, systems runtimes, and research</p>
+      {/* Section 01: Selected Systems — Auxia-style split header */}
+      <section className="flex flex-col gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
+          <div className="flex flex-col gap-1">
+            <span className="text-xs font-mono text-[#5954A8] font-bold">01 / SELECTED SYSTEMS</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1B1B1F] tracking-tight">
+              Engineered Systems
+            </h2>
           </div>
-          <Link
-            href="/projects"
-            className="text-xs font-mono text-[#5954A8] hover:underline"
-          >
-            <span>All projects ({projectList.length}) &rarr;</span>
-          </Link>
+          <div className="md:col-span-2">
+            <p className="text-sm sm:text-base text-[#46464F] leading-relaxed">
+              Low-level research engines, microarchitectural verification tools, and high-throughput distributed daemons built from first principles in C, Go, Python, and TypeScript.
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {featuredProjects.map((project) => (
             <Card
               key={project.slug}
-              className="flex flex-col justify-between rounded-3xl border-[#C8C5D0]/30 bg-white p-6 hover:border-[#5954A8]/40 hover:shadow-xs transition-all duration-200 group"
+              className="flex flex-col justify-between rounded-3xl border-[#C8C5D0]/30 bg-white p-7 hover:border-[#5954A8]/40 hover:shadow-xs transition-all duration-200 group"
             >
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3.5">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex flex-col gap-0.5">
-                    <h3 className="text-lg font-bold text-[#1D1B20] group-hover:text-[#5954A8] transition-colors">
+                    <h3 className="text-lg font-bold text-[#1B1B1F] group-hover:text-[#5954A8] transition-colors">
                       {project.title}
                     </h3>
                     <span className="text-xs font-mono text-[#5954A8]">
@@ -131,21 +158,38 @@ export default function Home() {
 
                   <Badge
                     variant="outline"
-                    className="text-[10px] font-mono border-[#C8C5D0]/40 bg-[#F4F2F8] px-2.5 py-0.5 text-[#49454F] shrink-0"
+                    className="text-[10px] font-mono border-[#C8C5D0]/40 bg-[#F4F2F7] px-2.5 py-0.5 text-[#46464F] shrink-0"
                   >
                     {project.status}
                   </Badge>
                 </div>
 
-                <p className="text-sm text-[#49454F] leading-relaxed">
+                <p className="text-sm text-[#46464F] leading-relaxed">
                   {project.description}
                 </p>
+
+                {/* Architectural Highlights */}
+                {project.highlights && project.highlights.length > 0 && (
+                  <div className="flex flex-col gap-1.5 p-3.5 rounded-2xl bg-[#F4F2F7] border border-[#C8C5D0]/20 mt-1">
+                    <span className="text-[10px] font-mono text-[#635F6A] uppercase tracking-wider font-semibold">
+                      Key Capabilities
+                    </span>
+                    <ul className="list-none p-0 m-0 flex flex-col gap-1 text-xs text-[#46464F]">
+                      {project.highlights.slice(0, 3).map((h, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#5954A8] mt-1.5 shrink-0" />
+                          <span className="leading-snug">{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   {project.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="text-[11px] font-mono text-[#49454F] bg-[#F4F2F8] border border-[#C8C5D0]/30 px-2.5 py-0.5 rounded-full"
+                      className="text-[11px] font-mono text-[#46464F] bg-[#F4F2F7] border border-[#C8C5D0]/30 px-2.5 py-0.5 rounded-full"
                     >
                       {tech}
                     </span>
@@ -164,16 +208,16 @@ export default function Home() {
                       href={project.repoUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[#49454F] hover:text-[#1D1B20] transition-colors"
+                      className="text-[#46464F] hover:text-[#1B1B1F] transition-colors"
                     >
-                      [Source]
+                      [Source Code]
                     </a>
                   )}
                   <Link
                     href={`/projects`}
                     className="text-[#5954A8] hover:underline"
                   >
-                    Details &rarr;
+                    View Details &rarr;
                   </Link>
                 </div>
               </div>
@@ -182,63 +226,122 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experience History */}
-      <section className="flex flex-col gap-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight text-[#1D1B20] font-sans">Work Experience</h2>
-            <p className="text-xs font-mono text-[#635F6A] mt-0.5">Industry internships and technical ownership</p>
+      {/* Section 02: Work Experience — Auxia-style split header */}
+      <section className="flex flex-col gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
+          <div className="flex flex-col gap-1">
+            <span className="text-xs font-mono text-[#5954A8] font-bold">02 / INDUSTRY WORK</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1B1B1F] tracking-tight">
+              Work Experience
+            </h2>
           </div>
-          <Link
-            href="/about"
-            className="text-xs font-mono text-[#5954A8] hover:underline"
-          >
-            <span>Full CV &rarr;</span>
-          </Link>
+          <div className="md:col-span-2">
+            <p className="text-sm sm:text-base text-[#46464F] leading-relaxed">
+              Production engineering internships with verified ownership over database access control, data warehouse ingestion RPCs, and multi-tenant applications.
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
           {experienceList.map((exp, idx) => (
-            <Card key={idx} className="p-6 rounded-3xl border-[#C8C5D0]/30 bg-white flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-              <div className="flex flex-col gap-1.5 max-w-2xl">
-                <div className="flex items-baseline gap-2">
-                  <h3 className="text-lg font-bold text-[#1D1B20]">{exp.company}</h3>
-                  <span className="text-xs font-mono text-[#635F6A]">/ {exp.type}</span>
+            <Card key={idx} className="p-7 rounded-3xl border-[#C8C5D0]/30 bg-white flex flex-col gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#C8C5D0]/20 pb-3">
+                <div>
+                  <h3 className="text-lg font-bold text-[#1B1B1F]">{exp.company}</h3>
+                  <span className="text-xs font-mono text-[#5954A8] font-semibold">{exp.role}</span>
                 </div>
-                <span className="text-xs font-mono text-[#5954A8] font-semibold">{exp.role}</span>
-                <p className="text-xs sm:text-sm text-[#49454F] leading-relaxed mt-1">
-                  {exp.bullets[0]}
-                </p>
-                <div className="flex flex-wrap gap-1.5 pt-2">
-                  {exp.techStack.map((t) => (
-                    <span key={t} className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#F4F2F8] border border-[#C8C5D0]/30 text-[#49454F]">
-                      {t}
-                    </span>
-                  ))}
+                <div className="flex items-center gap-2 text-xs font-mono text-[#635F6A]">
+                  <span className="px-3 py-1 rounded-full bg-[#F4F2F7] border border-[#C8C5D0]/40">{exp.timeline}</span>
+                  <span className="text-[#C8C5D0]">/</span>
+                  <span>{exp.type}</span>
                 </div>
               </div>
 
-              <div className="shrink-0 text-xs font-mono text-[#49454F] border border-[#C8C5D0]/40 bg-[#F4F2F8] rounded-full px-3 py-1 self-start">
-                {exp.timeline}
+              <ul className="list-none p-0 m-0 flex flex-col gap-2 text-xs sm:text-sm text-[#46464F] leading-relaxed">
+                {exp.bullets.map((bullet, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#5954A8] mt-2 shrink-0" />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex flex-wrap gap-1.5 pt-2">
+                {exp.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-[11px] font-mono text-[#46464F] bg-[#F4F2F7] border border-[#C8C5D0]/30 px-2.5 py-0.5 rounded-full"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
             </Card>
           ))}
         </div>
       </section>
 
-      {/* Engineering Notes / Digital Garden Preview */}
-      <section className="flex flex-col gap-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight text-[#1D1B20] font-sans">Engineering Notes</h2>
-            <p className="text-xs font-mono text-[#635F6A] mt-0.5">Detailed research writeups and architecture deep dives</p>
+      {/* Section 03: Education & Academic Performance */}
+      <section className="flex flex-col gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
+          <div className="flex flex-col gap-1">
+            <span className="text-xs font-mono text-[#5954A8] font-bold">03 / ACADEMIC FOUNDATION</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1B1B1F] tracking-tight">
+              Education &amp; Rigor
+            </h2>
           </div>
-          <Link
-            href="/blogs"
-            className="text-xs font-mono text-[#5954A8] hover:underline"
-          >
-            <span>All notes ({gardenNotes.length}) &rarr;</span>
-          </Link>
+          <div className="md:col-span-2">
+            <p className="text-sm sm:text-base text-[#46464F] leading-relaxed">
+              Top percentile academic performance combining core computer science and operating systems with concurrent data science and algorithmic optimization.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {educationList.map((edu) => (
+            <Card
+              key={edu.institution}
+              className="flex flex-col justify-between p-6 rounded-3xl border-[#C8C5D0]/30 bg-white shadow-xs"
+            >
+              <div className="flex flex-col gap-2.5">
+                <div className="flex items-center justify-between text-xs font-mono text-[#635F6A]">
+                  <span>{edu.timeline}</span>
+                  <Badge variant="outline" className="border-[#C7BFFF]/40 bg-[#E3DFFF] text-[#140E62] text-[10px] font-bold">
+                    {edu.grade}
+                  </Badge>
+                </div>
+                <h3 className="text-base font-bold text-[#1B1B1F] leading-snug">{edu.institution}</h3>
+                <span className="text-xs font-mono text-[#5954A8] font-medium">{edu.degree}</span>
+                <p className="text-xs text-[#46464F] leading-relaxed mt-1">{edu.details}</p>
+              </div>
+
+              <ul className="mt-4 pt-4 border-t border-[#C8C5D0]/20 list-none p-0 flex flex-col gap-1.5 text-xs text-[#635F6A]">
+                {edu.highlights.map((h, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#5954A8] mt-1.5 shrink-0" />
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Section 04: Engineering Notes / Digital Garden */}
+      <section className="flex flex-col gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
+          <div className="flex flex-col gap-1">
+            <span className="text-xs font-mono text-[#5954A8] font-bold">04 / DIGITAL GARDEN</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1B1B1F] tracking-tight">
+              Engineering Notes
+            </h2>
+          </div>
+          <div className="md:col-span-2">
+            <p className="text-sm sm:text-base text-[#46464F] leading-relaxed">
+              In-depth research writeups and systems architectural notes. Organized by growth stage from early seedlings to evergreen reference patterns.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -258,11 +361,11 @@ export default function Home() {
                     <span className="text-[#635F6A] font-mono text-[11px]">{note.date}</span>
                   </div>
 
-                  <h3 className="text-base font-bold text-[#1D1B20] group-hover:text-[#5954A8] transition-colors leading-snug">
+                  <h3 className="text-base font-bold text-[#1B1B1F] group-hover:text-[#5954A8] transition-colors leading-snug">
                     {note.title}
                   </h3>
 
-                  <p className="text-xs text-[#49454F] leading-relaxed">
+                  <p className="text-xs text-[#46464F] leading-relaxed">
                     {note.excerpt}
                   </p>
                 </div>
@@ -279,33 +382,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="rounded-3xl border border-[#C8C5D0]/40 bg-[#F4F2F8] p-8 sm:p-10 flex flex-col gap-6">
+      {/* Section 05: Auxia-Style Callout Contact */}
+      <section className="rounded-3xl border border-[#C8C5D0]/40 bg-[#F4F2F7] p-8 sm:p-12 flex flex-col gap-6">
         <div className="flex flex-col gap-2 max-w-2xl">
           <span className="text-xs font-mono uppercase tracking-wider text-[#5954A8] font-bold">
-            Connect
+            05 / CONTACT
           </span>
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#1D1B20] tracking-tight font-sans">
-            Get in touch
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1B1B1F] tracking-tight font-sans">
+            Let&apos;s build something durable together.
           </h2>
-          <p className="text-sm text-[#49454F] leading-relaxed">
-            I am always open to discussing low-level engineering, distributed infrastructure, research collaborations, or full-time / internship opportunities.
+          <p className="text-sm sm:text-base text-[#46464F] leading-relaxed">
+            I am always open to discussing systems programming, distributed infrastructure, open-source projects, and engineering opportunities.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3 pt-2">
           <a
             href={`mailto:${personalInfo.email}`}
-            className="inline-flex items-center px-5 py-2.5 rounded-full text-xs font-mono bg-[#5954A8] text-white hover:bg-[#4B4699] transition-colors shadow-xs font-medium"
+            className="inline-flex items-center px-6 py-3 rounded-full text-xs font-mono bg-[#5954A8] text-white hover:bg-[#4B4699] transition-colors shadow-xs font-semibold"
           >
-            <span>Email ({personalInfo.email})</span>
+            <span>Email me ({personalInfo.email})</span>
           </a>
 
           <a
             href={personalInfo.github}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center px-4 py-2.5 rounded-full text-xs font-mono bg-white border border-[#C8C5D0]/60 text-[#1D1B20] hover:bg-[#EEEBF2] transition-colors"
+            className="inline-flex items-center px-5 py-3 rounded-full text-xs font-mono bg-white border border-[#C8C5D0]/60 text-[#1B1B1F] hover:bg-[#EEEBF2] transition-colors font-medium"
           >
             <span>GitHub Profile</span>
           </a>
@@ -314,7 +417,7 @@ export default function Home() {
             href={personalInfo.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center px-4 py-2.5 rounded-full text-xs font-mono bg-white border border-[#C8C5D0]/60 text-[#1D1B20] hover:bg-[#EEEBF2] transition-colors"
+            className="inline-flex items-center px-5 py-3 rounded-full text-xs font-mono bg-white border border-[#C8C5D0]/60 text-[#1B1B1F] hover:bg-[#EEEBF2] transition-colors font-medium"
           >
             <span>LinkedIn</span>
           </a>

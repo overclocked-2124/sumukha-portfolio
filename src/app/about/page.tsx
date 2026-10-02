@@ -26,24 +26,22 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="flex flex-col gap-14 py-8">
-      {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-        <div className="flex flex-col gap-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#5954A8] tracking-widest uppercase">
-            <span className="w-2 h-2 rounded-full bg-[#5954A8]" />
-            <span>Profile &amp; Engineering Focus</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1D1B20] font-sans">
+    <div className="flex flex-col gap-16 py-4">
+      {/* Page Header — Auxia-style split header */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 border-b border-[#C8C5D0]/30 pb-8 items-start">
+        <div className="flex flex-col gap-1">
+          <span className="text-xs font-mono text-[#5954A8] font-bold">ABOUT / PROFILE</span>
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1B1B1F] font-sans">
             Sumukha Upadhyaya
           </h1>
-          <p className="text-base text-[#49454F] leading-relaxed font-normal">
-            Software Engineer • Information Science at RVCE &amp; Data Science at IIT Madras
-          </p>
         </div>
-
-        <div className="shrink-0 flex items-center gap-3">
-          <ResumeModal />
+        <div className="md:col-span-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p className="text-base text-[#46464F] leading-relaxed font-normal">
+            Software engineer and undergraduate student at RVCE and IIT Madras. Systems engineering, backend infrastructure, and web architectures.
+          </p>
+          <div className="shrink-0">
+            <ResumeModal />
+          </div>
         </div>
       </div>
 
@@ -54,30 +52,93 @@ export default function AboutPage() {
             SU
           </div>
           <div>
-            <h2 className="text-xl font-bold text-[#1D1B20] font-sans">{personalInfo.name}</h2>
+            <h2 className="text-xl font-bold text-[#1B1B1F] font-sans">{personalInfo.name}</h2>
             <span className="text-xs font-mono text-[#5954A8]">@{personalInfo.githubHandle} • Systems &amp; Web Architectures</span>
           </div>
         </div>
 
-        <div className="space-y-4 text-sm sm:text-base text-[#49454F] leading-relaxed">
+        <div className="space-y-4 text-sm sm:text-base text-[#46464F] leading-relaxed">
           {personalInfo.bio.map((paragraph, idx) => (
             <p key={idx}>{paragraph}</p>
           ))}
         </div>
 
         <div className="pt-4 border-t border-[#C8C5D0]/20 flex flex-wrap gap-6 text-xs font-mono text-[#635F6A]">
-          <div><span className="text-[#1D1B20] font-semibold">Location:</span> {personalInfo.location}</div>
-          <div><span className="text-[#1D1B20] font-semibold">Email:</span> <a href={`mailto:${personalInfo.email}`} className="text-[#5954A8] hover:underline">{personalInfo.email}</a></div>
-          <div><span className="text-[#1D1B20] font-semibold">Phone:</span> {personalInfo.phone}</div>
-          <div><span className="text-[#1D1B20] font-semibold">GitHub:</span> <a href={personalInfo.github} target="_blank" rel="noreferrer" className="text-[#5954A8] hover:underline">github.com/{personalInfo.githubHandle}</a></div>
+          <div><span className="text-[#1B1B1F] font-semibold">Location:</span> {personalInfo.location}</div>
+          <div><span className="text-[#1B1B1F] font-semibold">Email:</span> <a href={`mailto:${personalInfo.email}`} className="text-[#5954A8] hover:underline">{personalInfo.email}</a></div>
+          <div><span className="text-[#1B1B1F] font-semibold">Phone:</span> {personalInfo.phone}</div>
+          <div><span className="text-[#1B1B1F] font-semibold">GitHub:</span> <a href={personalInfo.github} target="_blank" rel="noreferrer" className="text-[#5954A8] hover:underline">github.com/{personalInfo.githubHandle}</a></div>
         </div>
       </Card>
 
+      {/* Experience History */}
+      <section className="flex flex-col gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
+          <div className="flex flex-col gap-1">
+            <span className="text-xs font-mono text-[#5954A8] font-bold">WORK EXPERIENCE</span>
+            <h2 className="text-2xl font-bold tracking-tight text-[#1B1B1F] font-sans">Industry Experience</h2>
+          </div>
+          <div className="md:col-span-2">
+            <p className="text-sm text-[#46464F] leading-relaxed">
+              Engineering internships at Auxia and FindInbox focused on live production rollouts, access control, and BigQuery data pipelines.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          {experienceList.map((exp, idx) => (
+            <Card
+              key={idx}
+              className="p-6 rounded-3xl border-[#C8C5D0]/30 bg-white shadow-xs flex flex-col gap-4"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#C8C5D0]/20 pb-3">
+                <div>
+                  <h3 className="text-lg font-bold text-[#1B1B1F]">{exp.company}</h3>
+                  <span className="text-xs font-mono text-[#5954A8] font-semibold">{exp.role}</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs font-mono text-[#635F6A]">
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#F4F2F7] border border-[#C8C5D0]/40">{exp.timeline}</span>
+                  <span className="text-[#C8C5D0]">/</span>
+                  <span>{exp.type}</span>
+                </div>
+              </div>
+
+              <ul className="list-none p-0 m-0 flex flex-col gap-2 text-xs sm:text-sm text-[#46464F] leading-relaxed">
+                {exp.bullets.map((bullet, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#5954A8] mt-2 shrink-0" />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex flex-wrap gap-1.5 pt-2">
+                {exp.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-[11px] font-mono text-[#46464F] bg-[#F4F2F7] border border-[#C8C5D0]/30 px-2.5 py-0.5 rounded-full"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
+
       {/* Education Section */}
-      <section className="flex flex-col gap-5">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#5954A8]" />
-          <h2 className="text-2xl font-bold tracking-tight text-[#1D1B20] font-sans">Academic Foundation</h2>
+      <section className="flex flex-col gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
+          <div className="flex flex-col gap-1">
+            <span className="text-xs font-mono text-[#5954A8] font-bold">ACADEMIC FOUNDATION</span>
+            <h2 className="text-2xl font-bold tracking-tight text-[#1B1B1F] font-sans">Education &amp; Credentials</h2>
+          </div>
+          <div className="md:col-span-2">
+            <p className="text-sm text-[#46464F] leading-relaxed">
+              Dual academic tracks covering systems engineering, computer architecture, data science, and mathematical foundations.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -93,9 +154,9 @@ export default function AboutPage() {
                     {edu.grade}
                   </Badge>
                 </div>
-                <h3 className="text-base font-bold text-[#1D1B20] leading-snug">{edu.institution}</h3>
+                <h3 className="text-base font-bold text-[#1B1B1F] leading-snug">{edu.institution}</h3>
                 <span className="text-xs font-mono text-[#5954A8] font-medium">{edu.degree}</span>
-                <p className="text-xs text-[#49454F] leading-relaxed mt-1">{edu.details}</p>
+                <p className="text-xs text-[#46464F] leading-relaxed mt-1">{edu.details}</p>
               </div>
 
               <ul className="mt-4 pt-4 border-t border-[#C8C5D0]/20 list-none p-0 flex flex-col gap-1.5 text-xs text-[#635F6A]">
@@ -111,60 +172,18 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Experience History */}
-      <section className="flex flex-col gap-5">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#5954A8]" />
-          <h2 className="text-2xl font-bold tracking-tight text-[#1D1B20] font-sans">Industry Experience</h2>
-        </div>
-
-        <div className="flex flex-col gap-5">
-          {experienceList.map((exp, idx) => (
-            <Card
-              key={idx}
-              className="p-6 rounded-3xl border-[#C8C5D0]/30 bg-white shadow-xs flex flex-col gap-4"
-            >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#C8C5D0]/20 pb-3">
-                <div>
-                  <h3 className="text-lg font-bold text-[#1D1B20]">{exp.company}</h3>
-                  <span className="text-xs font-mono text-[#5954A8] font-semibold">{exp.role}</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs font-mono text-[#635F6A]">
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#F4F2F8] border border-[#C8C5D0]/40">{exp.timeline}</span>
-                  <span className="text-[#C8C5D0]">/</span>
-                  <span>{exp.type}</span>
-                </div>
-              </div>
-
-              <ul className="list-none p-0 m-0 flex flex-col gap-2 text-xs sm:text-sm text-[#49454F] leading-relaxed">
-                {exp.bullets.map((bullet, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#5954A8] mt-2 shrink-0" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="flex flex-wrap gap-1.5 pt-2">
-                {exp.techStack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-[11px] font-mono text-[#49454F] bg-[#F4F2F8] border border-[#C8C5D0]/30 px-2.5 py-0.5 rounded-full"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* Leadership & Organization Roles */}
-      <section className="flex flex-col gap-5">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#7A5368]" />
-          <h2 className="text-2xl font-bold tracking-tight text-[#1D1B20] font-sans">Leadership &amp; Community Roles</h2>
+      <section className="flex flex-col gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
+          <div className="flex flex-col gap-1">
+            <span className="text-xs font-mono text-[#5954A8] font-bold">LEADERSHIP &amp; COMMUNITY</span>
+            <h2 className="text-2xl font-bold tracking-tight text-[#1B1B1F] font-sans">Campus &amp; Community Roles</h2>
+          </div>
+          <div className="md:col-span-2">
+            <p className="text-sm text-[#46464F] leading-relaxed">
+              Leading campus-wide hackathons, cybersecurity capture-the-flag competitions, and engineering mentorship initiatives.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -175,13 +194,13 @@ export default function AboutPage() {
             >
               <div className="flex flex-col gap-1.5">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-bold text-[#1D1B20]">{role.title}</h3>
-                  <Badge variant="outline" className="text-[10px] font-mono border-[#C8C5D0]/40 bg-[#F4F2F8] text-[#5954A8]">
+                  <h3 className="text-sm font-bold text-[#1B1B1F]">{role.title}</h3>
+                  <Badge variant="outline" className="text-[10px] font-mono border-[#C8C5D0]/40 bg-[#F4F2F7] text-[#5954A8]">
                     {role.roleType}
                   </Badge>
                 </div>
                 <span className="text-xs font-mono text-[#635F6A]">{role.organization}</span>
-                <p className="text-xs text-[#49454F] leading-relaxed mt-1">{role.description}</p>
+                <p className="text-xs text-[#46464F] leading-relaxed mt-1">{role.description}</p>
               </div>
             </Card>
           ))}
@@ -189,27 +208,41 @@ export default function AboutPage() {
       </section>
 
       {/* Engineering Tenets */}
-      <section className="flex flex-col gap-5">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#5954A8]" />
-          <h2 className="text-2xl font-bold tracking-tight text-[#1D1B20] font-sans">Engineering Tenets</h2>
+      <section className="flex flex-col gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
+          <div className="flex flex-col gap-1">
+            <span className="text-xs font-mono text-[#5954A8] font-bold">PHILOSOPHY</span>
+            <h2 className="text-2xl font-bold tracking-tight text-[#1B1B1F] font-sans">Engineering Tenets</h2>
+          </div>
+          <div className="md:col-span-2">
+            <p className="text-sm text-[#46464F] leading-relaxed">
+              Core design invariants that guide architectural decisions across low-level codebases and user-facing applications.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {tenets.map((t) => (
             <Card key={t.title} className="p-6 rounded-3xl border-[#C8C5D0]/30 bg-white shadow-xs flex flex-col gap-2.5">
-              <h3 className="text-sm font-bold text-[#1D1B20]">{t.title}</h3>
-              <p className="text-xs text-[#49454F] leading-relaxed">{t.description}</p>
+              <h3 className="text-sm font-bold text-[#1B1B1F]">{t.title}</h3>
+              <p className="text-xs text-[#46464F] leading-relaxed">{t.description}</p>
             </Card>
           ))}
         </div>
       </section>
 
       {/* Technical Competencies Matrix */}
-      <section className="flex flex-col gap-5">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#5954A8]" />
-          <h2 className="text-2xl font-bold tracking-tight text-[#1D1B20] font-sans">Technical Domain Matrix</h2>
+      <section className="flex flex-col gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
+          <div className="flex flex-col gap-1">
+            <span className="text-xs font-mono text-[#5954A8] font-bold">COMPETENCIES</span>
+            <h2 className="text-2xl font-bold tracking-tight text-[#1B1B1F] font-sans">Technical Domain Matrix</h2>
+          </div>
+          <div className="md:col-span-2">
+            <p className="text-sm text-[#46464F] leading-relaxed">
+              Languages, runtimes, distributed protocols, databases, and verification tools utilized in production and research.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -221,7 +254,7 @@ export default function AboutPage() {
             <div className="flex flex-col gap-2">
               {skillsData.languages.map((l) => (
                 <div key={l.name} className="flex items-center justify-between text-xs py-1.5 border-b border-[#C8C5D0]/15 last:border-none">
-                  <span className="font-semibold text-[#1D1B20]">{l.name}</span>
+                  <span className="font-semibold text-[#1B1B1F]">{l.name}</span>
                   <span className="font-mono text-[#635F6A]">{l.desc}</span>
                 </div>
               ))}
@@ -236,7 +269,7 @@ export default function AboutPage() {
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {skillsData.frameworksAndLibs.map((f) => (
-                  <span key={f} className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#F4F2F8] border border-[#C8C5D0]/30 text-[#49454F]">
+                  <span key={f} className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#F4F2F7] border border-[#C8C5D0]/30 text-[#49454F]">
                     {f}
                   </span>
                 ))}
@@ -249,7 +282,7 @@ export default function AboutPage() {
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {[...skillsData.databases, ...skillsData.cloudAndInfra].map((item) => (
-                  <span key={item} className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#F4F2F8] border border-[#C8C5D0]/30 text-[#49454F]">
+                  <span key={item} className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#F4F2F7] border border-[#C8C5D0]/30 text-[#49454F]">
                     {item}
                   </span>
                 ))}
@@ -262,7 +295,7 @@ export default function AboutPage() {
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {[...skillsData.systemsAndProtocols, ...skillsData.securityAndTools].map((item) => (
-                  <span key={item} className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#F4F2F8] border border-[#C8C5D0]/30 text-[#49454F]">
+                  <span key={item} className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#F4F2F7] border border-[#C8C5D0]/30 text-[#49454F]">
                     {item}
                   </span>
                 ))}
