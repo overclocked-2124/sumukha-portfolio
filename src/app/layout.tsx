@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Sumukha Upadhyaya • Portfolio & Digital Garden",
   description:
-    "Low-level systems, distributed infrastructure, living research notes, and personal engineering portfolio of Sumukha Upadhyaya (overclocked-2124).",
+    "Software engineer & student at RVCE and IIT Madras. Systems engineering, backend infrastructure, and web architectures.",
 };
 
 export default function RootLayout({
@@ -30,27 +30,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#080A12] text-slate-100 relative overflow-x-hidden selection:bg-indigo-500/30 selection:text-indigo-200">
+      <body className="min-h-full flex flex-col bg-[#FAF8FD] text-[#1D1B20] relative selection:bg-[#E3DFFF] selection:text-[#140E62]">
         <MaterialInit />
         
-        {/* Ambient Cosmic Background Effects */}
+        {/* Soft Material You Expressive Ambient Tint Layers */}
         <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-          {/* Deep space radial glow top-center */}
-          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[850px] h-[550px] bg-indigo-600/10 blur-[130px] rounded-full" />
-          {/* Starlight cyan nebula glow */}
-          <div className="absolute top-1/3 -left-32 w-[600px] h-[500px] bg-cyan-600/5 blur-[140px] rounded-full" />
-          {/* Violet deep nebula bottom-right */}
-          <div className="absolute -bottom-32 -right-32 w-[700px] h-[600px] bg-violet-600/8 blur-[160px] rounded-full" />
-          {/* Subtle cosmic starlight grid overlay */}
-          <div 
-            className="absolute inset-0 opacity-[0.025]"
-            style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, #94a3b8 1px, transparent 0)`,
-              backgroundSize: "32px 32px",
-            }}
-          />
+          {/* Subtle warm lavender glow top */}
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-[#EADDFF]/40 blur-[120px] rounded-full" />
+          {/* Subtle soft sage tint left */}
+          <div className="absolute top-1/3 -left-24 w-[500px] h-[400px] bg-[#D2E7D6]/35 blur-[120px] rounded-full" />
+          {/* Subtle soft peach tint right */}
+          <div className="absolute bottom-10 -right-24 w-[550px] h-[450px] bg-[#FFDCC1]/30 blur-[130px] rounded-full" />
         </div>
 
         {/* Floating Top Pill Navigation */}
@@ -63,7 +55,7 @@ export default function RootLayout({
           </main>
         </TooltipProvider>
 
-        {/* Space Station Footer */}
+        {/* Material 3 Expressive Footer */}
         <Footer />
       </body>
     </html>

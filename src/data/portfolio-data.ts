@@ -66,7 +66,7 @@ export interface LeadershipRole {
 export const personalInfo: PersonalInfo = {
   name: "Sumukha Upadhyaya",
   title: "Systems Engineer & Full-Stack Architect",
-  tagline: "Cultivating low-level systems, distributed infrastructure, and refined digital experiences in deep space.",
+  tagline: "Building robust low-level runtimes, high-throughput distributed systems, and modern web architectures.",
   location: "Bangalore, India",
   email: "sumukhaupadhyaya@gmail.com",
   phone: "+91 98440 29396",
@@ -618,7 +618,7 @@ To achieve seamless harmony, we map all CSS custom properties to a single author
 
 ### Strict Zero-Emoji Rule and Visual Restraint
 
-A key design rule in this digital garden is the **Strict Zero-Emoji Policy**. Rather than cartoonish smileys, we employ high-precision SVG vector glyphs (Lucide / Material Symbols) and high-contrast typography, evoking the refined ambiance of a spacecraft mission control terminal.
+A key design rule in this digital garden is the **Strict Zero-Emoji & Icon-Free Policy**. Rather than decorative stickers or pictorial clutter, we employ Google Material You 3 Expressive pastel design tokens and high-contrast typography, creating a serene, human, and readable editorial experience.
 `
   },
   {

@@ -26,63 +26,77 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-xl: calc(var(--radius) * 1.25);
+  --radius-2xl: calc(var(--radius) * 1.5);
+  --radius-3xl: calc(var(--radius) * 1.75);
+  --radius-4xl: calc(var(--radius) * 2);
 }
 
 :root {
-  /* Dark Cosmic Space Theme by default */
-  --background: #080A12;
-  --foreground: #F1F5F9;
+  /* Google Material You 3 Expressive Pastel Palette */
+  --background: #FAF8FD;
+  --foreground: #1D1B20;
   
-  --card: #0E1222;
-  --card-foreground: #F1F5F9;
+  --card: #FFFFFF;
+  --card-foreground: #1D1B20;
   
-  --popover: #0E1222;
-  --popover-foreground: #F1F5F9;
+  --popover: #FFFFFF;
+  --popover-foreground: #1D1B20;
   
-  --primary: #818CF8;
-  --primary-foreground: #080A12;
+  /* Primary: Expressive Iris / Lavender */
+  --primary: #5954A8;
+  --primary-foreground: #FFFFFF;
   
-  --secondary: #171E36;
-  --secondary-foreground: #E2E8F0;
+  /* Secondary: Soft Slate Mauve */
+  --secondary: #E4E0F8;
+  --secondary-foreground: #1C192B;
   
-  --muted: #141A30;
-  --muted-foreground: #94A3B8;
+  /* Muted: Soft Neutral Tint */
+  --muted: #F2EEF6;
+  --muted-foreground: #635F6A;
   
-  --accent: #1E2746;
-  --accent-foreground: #F8FAFC;
+  /* Accent: Pastel Container Tint */
+  --accent: #E8E4F8;
+  --accent-foreground: #19154E;
   
-  --destructive: #F87171;
-  --border: rgba(148, 163, 184, 0.14);
-  --input: rgba(148, 163, 184, 0.2);
-  --ring: #818CF8;
-  --radius: 0.75rem;
+  --destructive: #BA1A1A;
+  --border: rgba(121, 116, 126, 0.16);
+  --input: rgba(121, 116, 126, 0.22);
+  --ring: #5954A8;
+  --radius: 1.25rem;
 
   /* Google Material 3 System Tokens Harmonized */
-  --md-sys-color-primary: #818CF8;
-  --md-sys-color-on-primary: #080A12;
-  --md-sys-color-primary-container: #1E2746;
-  --md-sys-color-on-primary-container: #C7D2FE;
+  --md-sys-color-primary: #5954A8;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #E3DFFF;
+  --md-sys-color-on-primary-container: #140E62;
   
-  --md-sys-color-surface: #080A12;
-  --md-sys-color-surface-dim: #05070D;
-  --md-sys-color-surface-bright: #141A30;
-  --md-sys-color-surface-container-lowest: #080A12;
-  --md-sys-color-surface-container-low: #0E1222;
-  --md-sys-color-surface-container: #141A30;
-  --md-sys-color-surface-container-high: #1A223E;
-  --md-sys-color-surface-container-highest: #232C4E;
+  --md-sys-color-secondary: #5F5C71;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #E4E0F8;
+  --md-sys-color-on-secondary-container: #1C192B;
+
+  --md-sys-color-tertiary: #7A5368;
+  --md-sys-color-on-tertiary: #FFFFFF;
+  --md-sys-color-tertiary-container: #FFD8EA;
+  --md-sys-color-on-tertiary-container: #301123;
   
-  --md-sys-color-on-surface: #F1F5F9;
-  --md-sys-color-on-surface-variant: #94A3B8;
-  --md-sys-color-outline: rgba(148, 163, 184, 0.25);
-  --md-sys-color-outline-variant: rgba(148, 163, 184, 0.12);
+  --md-sys-color-surface: #FAF8FD;
+  --md-sys-color-surface-dim: #DCD9E0;
+  --md-sys-color-surface-bright: #FAF8FD;
+  --md-sys-color-surface-container-lowest: #FFFFFF;
+  --md-sys-color-surface-container-low: #F4F2F8;
+  --md-sys-color-surface-container: #EEEBF2;
+  --md-sys-color-surface-container-high: #E8E5EC;
+  --md-sys-color-surface-container-highest: #E2DFE6;
+  
+  --md-sys-color-on-surface: #1D1B20;
+  --md-sys-color-on-surface-variant: #49454F;
+  --md-sys-color-outline: #79747E;
+  --md-sys-color-outline-variant: #C8C5D0;
   
   --md-sys-shape-corner-none: 0px;
   --md-sys-shape-corner-xs: 4px;
@@ -92,7 +106,6 @@
   --md-sys-shape-corner-xl: 28px;
   --md-sys-shape-corner-full: 9999px;
 
-  /* Material 3 typography */
   --md-ref-typeface-brand: var(--font-sans, system-ui);
   --md-ref-typeface-plain: var(--font-sans, system-ui);
 }
@@ -102,16 +115,16 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground antialiased selection:bg-indigo-500/30 selection:text-indigo-200;
+    @apply bg-background text-foreground antialiased selection:bg-[#E3DFFF] selection:text-[#140E62];
     min-height: 100vh;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 }
 
-/* Material 3 Web Component overrides to blend perfectly with shadcn */
+/* Material 3 Web Component overrides */
 md-outlined-button,
 md-filled-button,
 md-text-button {
@@ -127,19 +140,40 @@ md-filter-chip,
 md-assist-chip {
   --md-filter-chip-container-shape: 9999px;
   --md-assist-chip-container-shape: 9999px;
-  --md-filter-chip-outline-color: rgba(148, 163, 184, 0.16);
-  --md-filter-chip-selected-container-color: #1E2746;
-  --md-filter-chip-selected-label-text-color: #C7D2FE;
+  --md-filter-chip-outline-color: rgba(121, 116, 126, 0.2);
+  --md-filter-chip-selected-container-color: #E3DFFF;
+  --md-filter-chip-selected-label-text-color: #140E62;
   font-family: inherit;
   font-size: 0.8125rem;
 }
 
-/* Subtle space glow utilities */
-.cosmic-glow {
-  box-shadow: 0 0 40px -10px rgba(129, 140, 248, 0.2);
+/* Pastel tonal container helpers */
+.m3-surface-low {
+  background-color: #F4F2F8;
 }
-
-.cosmic-border {
-  border: 1px solid rgba(148, 163, 184, 0.12);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+.m3-surface-container {
+  background-color: #EEEBF2;
+}
+.m3-surface-high {
+  background-color: #E8E5EC;
+}
+.m3-pastel-lavender {
+  background-color: #E3DFFF;
+  color: #140E62;
+}
+.m3-pastel-sage {
+  background-color: #D2E7D6;
+  color: #0F381E;
+}
+.m3-pastel-peach {
+  background-color: #FFDCC1;
+  color: #2E1500;
+}
+.m3-pastel-rose {
+  background-color: #FFD8EA;
+  color: #301123;
+}
+.m3-pastel-sky {
+  background-color: #CCE5FF;
+  color: #001E30;
 }

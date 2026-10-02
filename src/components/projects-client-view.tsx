@@ -33,7 +33,7 @@ export function ProjectsClientView() {
   return (
     <div className="flex flex-col gap-8">
       {/* Search and Category Control Strip */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 rounded-2xl border border-slate-800/80 bg-slate-950/70 backdrop-blur-sm">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 rounded-3xl border border-[#C8C5D0]/30 bg-white shadow-xs">
         {/* Category Filter Chips */}
         <div className="flex flex-wrap items-center gap-1.5">
           {categories.map((cat) => (
@@ -41,10 +41,10 @@ export function ProjectsClientView() {
               key={cat}
               type="button"
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
+              className={`px-3.5 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
                 selectedCategory === cat
-                  ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-medium"
-                  : "bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-slate-200 hover:border-slate-700"
+                  ? "bg-[#E3DFFF] text-[#140E62] border border-[#C7BFFF]/60 font-semibold shadow-xs"
+                  : "bg-[#F4F2F8] text-[#49454F] border border-[#C8C5D0]/30 hover:bg-[#EEEBF2] hover:text-[#1D1B20]"
               }`}
             >
               {cat}
@@ -52,20 +52,20 @@ export function ProjectsClientView() {
           ))}
         </div>
 
-        {/* Search Bar without icon */}
+        {/* Search Bar */}
         <div className="w-full sm:w-64">
           <Input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Filter systems & stack..."
-            className="h-8 text-xs font-mono bg-slate-900/80 border-slate-800 text-slate-200 rounded-full focus-visible:ring-indigo-500/30 px-3.5"
+            placeholder="Search projects & stack..."
+            className="h-9 text-xs font-mono bg-[#FAF8FD] border-[#C8C5D0]/40 text-[#1D1B20] rounded-full focus-visible:ring-[#5954A8] px-4"
           />
         </div>
       </div>
 
       {/* Results Telemetry */}
-      <div className="flex items-center justify-between text-xs font-mono text-slate-500 px-1">
-        <span>SHOWING {filteredProjects.length} OF {projectList.length} ARTIFACTS</span>
+      <div className="flex items-center justify-between text-xs font-mono text-[#635F6A] px-1">
+        <span>SHOWING {filteredProjects.length} OF {projectList.length} PROJECTS</span>
         <span>STATUS: PRODUCTION &amp; RESEARCH</span>
       </div>
 
@@ -74,43 +74,43 @@ export function ProjectsClientView() {
         {filteredProjects.map((project) => (
           <Card
             key={project.slug}
-            className="flex flex-col justify-between rounded-2xl border-slate-800/80 bg-slate-950/75 p-6 hover:border-indigo-500/40 hover:bg-slate-900/60 transition-all duration-300 backdrop-blur-sm group"
+            className="flex flex-col justify-between rounded-3xl border-[#C8C5D0]/30 bg-white p-6 hover:shadow-md transition-all duration-200 group"
           >
             <div className="flex flex-col gap-4">
               {/* Header */}
               <div className="flex items-start justify-between gap-4">
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-lg font-bold text-white tracking-tight group-hover:text-indigo-300 transition-colors">
+                  <h3 className="text-lg font-bold text-[#1D1B20] tracking-tight group-hover:text-[#5954A8] transition-colors">
                     {project.title}
                   </h3>
-                  <span className="text-xs font-mono text-cyan-400/90 leading-tight">
+                  <span className="text-xs font-mono text-[#5954A8] leading-tight">
                     {project.tagline}
                   </span>
                 </div>
 
                 <Badge
                   variant="outline"
-                  className="rounded-full text-[10px] font-mono border-slate-800 bg-slate-900/90 text-slate-400 px-2.5 py-0.5 shrink-0"
+                  className="rounded-full text-[10px] font-mono border-[#C8C5D0]/40 bg-[#F4F2F8] text-[#49454F] px-2.5 py-0.5 shrink-0"
                 >
                   {project.status}
                 </Badge>
               </div>
 
               {/* Description */}
-              <p className="text-sm text-slate-300/85 leading-relaxed">
+              <p className="text-sm text-[#49454F] leading-relaxed">
                 {project.description}
               </p>
 
-              {/* Architectural Invariants */}
+              {/* Architectural Highlights */}
               {project.highlights && project.highlights.length > 0 && (
-                <div className="flex flex-col gap-1.5 p-3 rounded-xl bg-slate-900/50 border border-slate-800/60 mt-1">
-                  <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
-                    Architectural Invariants
+                <div className="flex flex-col gap-1.5 p-3.5 rounded-2xl bg-[#F4F2F8] border border-[#C8C5D0]/20 mt-1">
+                  <span className="text-[10px] font-mono text-[#635F6A] uppercase tracking-widest font-semibold">
+                    Key Features &amp; Architecture
                   </span>
-                  <ul className="list-none p-0 m-0 flex flex-col gap-1 text-xs text-slate-400">
+                  <ul className="list-none p-0 m-0 flex flex-col gap-1 text-xs text-[#49454F]">
                     {project.highlights.map((h, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <span className="w-1 h-1 rounded-full bg-indigo-400 mt-1.5 shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#5954A8] mt-1.5 shrink-0" />
                         <span className="leading-snug">{h}</span>
                       </li>
                     ))}
@@ -123,7 +123,7 @@ export function ProjectsClientView() {
                 {project.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="text-[11px] font-mono text-slate-300 bg-slate-900/90 border border-slate-800 px-2.5 py-0.5 rounded-full"
+                    className="text-[11px] font-mono text-[#49454F] bg-[#F4F2F8] border border-[#C8C5D0]/30 px-2.5 py-0.5 rounded-full"
                   >
                     {tech}
                   </span>
@@ -132,18 +132,18 @@ export function ProjectsClientView() {
             </div>
 
             {/* Footer with Links */}
-            <div className="flex items-center justify-between pt-6 mt-6 border-t border-slate-800/80">
-              <span className="text-xs font-mono text-slate-500">
+            <div className="flex items-center justify-between pt-6 mt-6 border-t border-[#C8C5D0]/20">
+              <span className="text-xs font-mono text-[#635F6A]">
                 {project.category}
               </span>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 {project.repoUrl && (
                   <a
                     href={project.repoUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center text-xs font-mono text-slate-300 hover:text-white transition-colors px-3 py-1 rounded-full bg-slate-900 border border-slate-800 hover:border-slate-700"
+                    className="inline-flex items-center text-xs font-mono text-[#49454F] hover:text-[#1D1B20] transition-colors px-3 py-1 rounded-full bg-[#F4F2F8] border border-[#C8C5D0]/40 hover:bg-[#EEEBF2]"
                   >
                     Source Code
                   </a>
@@ -151,7 +151,7 @@ export function ProjectsClientView() {
                 {project.demoUrl && (
                   <a
                     href={project.demoUrl}
-                    className="inline-flex items-center text-xs font-mono text-indigo-300 hover:text-white transition-colors px-3 py-1 rounded-full bg-indigo-950/60 border border-indigo-500/30 hover:border-indigo-500/60"
+                    className="inline-flex items-center text-xs font-mono text-[#140E62] hover:text-[#5954A8] transition-colors px-3 py-1 rounded-full bg-[#E3DFFF] border border-[#C7BFFF]/40 hover:bg-[#D5CEFF]"
                   >
                     Live Demo
                   </a>

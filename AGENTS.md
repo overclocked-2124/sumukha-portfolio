@@ -10,31 +10,32 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Project Design & Architecture Principles
 
-## 1. shadcn / shadcn-ui MCP Usage
-- **Exclusive Component Foundation**: Always use shadcn and shadcn-ui tools via the available MCP servers (`shadcn` and `shadcn-ui`) when adding, listing, or configuring UI components.
-- **Pre-flight Check**: Before introducing custom UI widgets, check `shadcn-ui/list_components` or `shadcn/search_items_in_registries` to install matching components via `install_component`.
-- **Maintain Registry Integrity**: Keep `components.json` aligned with the project's styling and directory aliases.
+## 1. Material You / Material Design 3 (M3) Expressive Standard
+- **Material 3 Expressive Tonal Architecture**: Strictly adhere to Google's Material 3 / Material You design system specifications (https://m3.material.io).
+- **Expressive Pastel Color System**: Use soft, expressive pastel tonal palettes:
+  - Primary: Deep iris / soft lavender (`#5954A8`), container `#E3DFFF`, on-container `#140E62`
+  - Secondary: Soft slate mauve (`#5F5C71`), container `#E4E0F8`, on-container `#1C192B`
+  - Tertiary: Pastel terracotta / warm rose (`#7A5368`), container `#FFD8EA`, on-container `#301123`
+  - Tonal Surface Tiers: Soft warm paper tints (`surface`, `surface-container-lowest`, `surface-container-low`, `surface-container`, `surface-container-high`, `surface-container-highest`)
+  - Outlines: Subtle, low-contrast tonal borders (`#C8C5D0` / `rgba(121, 116, 126, 0.16)`)
+- **M3 Shapes & Corners**: Generous Material 3 corner curves: `rounded-3xl` (24px) for content cards, `rounded-full` for chips, search inputs, and top pill navigation, and `rounded-2xl` (16px) for modals and secondary blocks.
+- **Elevation via Tonal Color**: Rely on subtle tonal color shifts between surface container tiers rather than heavy dark drop-shadows.
 
-## 2. Google Material 3 Standards (`@material/web`)
-- **Follow M3 System Specifications**: Adopt the Material 3 design philosophy by Google (https://m3.material.io and https://github.com/material-components/material-web).
-- **Design Tokens**: Adhere to M3 token hierarchy:
-  - Surface elevation tiers (`surface`, `surface-container-lowest`, `surface-container-low`, `surface-container`, `surface-container-high`, `surface-container-highest`).
-  - Tonal palettes and state layers (hover, focus, pressed, dragged).
-  - Shape corners (`corner-none`, `corner-xs`, `corner-s`, `corner-m`, `corner-l`, `corner-xl`, `corner-full`).
-- **Selective & Harmonious Usage**: Integrate Material 3 web components (`<md-elevation>`, `<md-ripple>`, `<md-chip-set>`, `<md-filter-chip>`, text fields, toggles) where they enhance ergonomics and tactile feedback.
+## 2. Zero AI Slop & Authentic Personal Voice
+- **No Space Metaphors or Sci-Fi Tropes**: Absolutely no artificial space station, cosmic void, celestial telemetry, planetary orbit, or robotic mission-control jargon.
+- **Grounded & Human Engineering Narrative**: Present real, concrete accomplishments for Sumukha Upadhyaya: academic excellence at RVCE (9.69 CGPA) and IIT Madras (9.15 GPA), internships at Auxia and FindInbox, technical leadership, and real production code.
+- **Clear & Practical Terminology**: Use natural, industry-standard engineering terms ("Systems & Security", "Distributed Infrastructure", "Frontend & UI", "Research Notes").
 
-## 3. Cohesive Component Harmonization
-- **Seamless Visual Blend**: shadcn components and Material 3 elements must never clash or look like disparate libraries glued together.
-- **Unified Design Tokens**: Map CSS custom properties (`--md-sys-color-*` and `--background`, `--primary`, `--card`, etc.) to the same central cosmic palette in `src/app/globals.css`.
-- **Consistent Radius and Stroke**: Standardize border radius (`rounded-xl` / `corner-l` / `corner-full` for pills) and border opacity across both component families.
+## 3. Strict Zero-Emoji & Icon-Free Restraint Rule
+- **No Emojis or Decorative Icons**: Never use emojis or icon clutter in UI copy, buttons, badges, headers, cards, or navigation items.
+- **Pure Typographic & Geometric Discipline**: Rely purely on typography (weight, size, case, letter-spacing) and minimal geometric indicators (dots, slashes, hairline borders).
+- **Clean Editorial Atmosphere**: Maintain an ultra-clean, serene, human-crafted editorial reading experience.
 
-## 4. Strict Zero-Emoji & Icon-Free Restraint Rule
-- **No Emojis or Graphical Clutter**: Never use emojis or decorative icons all around UI copy, buttons, badges, headers, or navigation items.
-- **Pure Typographic & Geometric Discipline**: Rely purely on typography (weight, size, case, letter-spacing) and minimal geometric indicators (dots, slashes, hair-lines).
-- **Classy & Editorial Tone**: Maintain an understated, ultra-clean, sophisticated space-themed atmosphere without pictorial noise.
+## 4. shadcn / shadcn-ui MCP Component Foundation
+- **Component Primitives**: Use shadcn components via MCP tools (`shadcn` and `shadcn-ui`) styled harmoniously with Material 3 tokens.
+- **Unified Design Tokens**: Map CSS custom properties (`--md-sys-color-*` and `--background`, `--primary`, `--card`, etc.) to the central pastel M3 palette in `src/app/globals.css`.
 
 ## 5. Professional Frontend Craftsmanship
-- **Spatial Rhythm**: Adhere strictly to an 8-point spatial system (spacing units in multiples of 4px/8px: `gap-2`, `gap-4`, `p-6`, `py-8`, `max-w-5xl`).
-- **Typography Scale**: High-contrast, clean sans-serif typography with strict hierarchy (Display, Headline, Title, Body, Label) and generous line-heights for readability.
-- **Atmospheric Depth**: Multi-tier cosmic dark background (`#080A14`, `#0D1127`), gentle celestial ambient glows, and tasteful glassmorphism (`backdrop-blur-xl bg-slate-950/60`).
-- **Tactile Transitions**: Smooth micro-interactions, subtle scale or glow on hover, and seamless page transitions.
+- **8-Point Spatial Cadence**: Spacing in multiples of 4px/8px (`gap-2`, `gap-4`, `p-6`, `py-8`, `max-w-5xl`).
+- **Google M3 Typescale**: Display, Headline, Title, Body, and Label hierarchy with generous line heights and high legibility.
+- **Airy, Light & Tactile Aesthetics**: Soft warm-tinted backgrounds, gentle hover highlights, and tactile ripple/elevation state layers.

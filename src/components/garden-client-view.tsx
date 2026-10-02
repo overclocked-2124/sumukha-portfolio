@@ -33,22 +33,22 @@ export function GardenClientView() {
   const getStageColor = (stage: GardenNote["stage"]) => {
     switch (stage) {
       case "Seedling":
-        return "border-emerald-500/30 bg-emerald-500/10 text-emerald-400";
+        return "border-[#85D49B]/40 bg-[#D2E7D6] text-[#0F381E]";
       case "Budding":
-        return "border-amber-500/30 bg-amber-500/10 text-amber-400";
+        return "border-[#FFB77D]/40 bg-[#FFDCC1] text-[#2E1500]";
       case "Evergreen":
-        return "border-indigo-500/30 bg-indigo-500/10 text-indigo-300";
+        return "border-[#C7BFFF]/40 bg-[#E3DFFF] text-[#140E62]";
     }
   };
 
   return (
     <div className="flex flex-col gap-8">
-      {/* Filter and Search Bar */}
-      <div className="flex flex-col gap-4 p-5 rounded-2xl border border-slate-800/80 bg-slate-950/75 backdrop-blur-sm">
+      {/* Filter and Search Bar in M3 Surface Container */}
+      <div className="flex flex-col gap-4 p-5 rounded-3xl border border-[#C8C5D0]/30 bg-white shadow-xs">
         {/* Stage Filter */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono text-slate-500 mr-1">
+            <span className="text-xs font-mono text-[#635F6A] mr-1">
               GROWTH STAGE:
             </span>
             {stages.map((stage) => (
@@ -56,10 +56,10 @@ export function GardenClientView() {
                 key={stage}
                 type="button"
                 onClick={() => setSelectedStage(stage)}
-                className={`px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                className={`px-3.5 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
                   selectedStage === stage
-                    ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-medium"
-                    : "bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-slate-200"
+                    ? "bg-[#E3DFFF] text-[#140E62] border border-[#C7BFFF]/60 font-semibold shadow-xs"
+                    : "bg-[#F4F2F8] text-[#49454F] border border-[#C8C5D0]/30 hover:bg-[#EEEBF2] hover:text-[#1D1B20]"
                 }`}
               >
                 {stage}
@@ -67,29 +67,29 @@ export function GardenClientView() {
             ))}
           </div>
 
-          {/* Search Box without icon */}
+          {/* Search Box */}
           <div className="w-full sm:w-64">
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search notes & tags..."
-              className="h-8 text-xs font-mono bg-slate-900/80 border-slate-800 text-slate-200 rounded-full focus-visible:ring-indigo-500/30 px-3.5"
+              className="h-9 text-xs font-mono bg-[#FAF8FD] border-[#C8C5D0]/40 text-[#1D1B20] rounded-full focus-visible:ring-[#5954A8] px-4"
             />
           </div>
         </div>
 
         {/* Category Pills */}
-        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-900 text-xs font-mono">
-          <span className="text-slate-500 mr-1">TOPIC DOMAIN:</span>
+        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#C8C5D0]/20 text-xs font-mono">
+          <span className="text-[#635F6A] mr-1">TOPIC:</span>
           {categories.map((cat) => (
             <button
               key={cat}
               type="button"
               onClick={() => setSelectedCategory(cat)}
-              className={`px-2.5 py-0.5 rounded text-[11px] font-mono transition-all cursor-pointer ${
+              className={`px-2.5 py-0.5 rounded-full text-[11px] font-mono transition-all cursor-pointer ${
                 selectedCategory === cat
-                  ? "bg-slate-800 text-indigo-300 font-medium"
-                  : "text-slate-500 hover:text-slate-300"
+                  ? "bg-[#E3DFFF] text-[#140E62] font-semibold"
+                  : "text-[#635F6A] hover:bg-[#F4F2F8] hover:text-[#1D1B20]"
               }`}
             >
               {cat}
@@ -99,7 +99,7 @@ export function GardenClientView() {
       </div>
 
       {/* Telemetry Stats */}
-      <div className="flex items-center justify-between text-xs font-mono text-slate-500 px-1">
+      <div className="flex items-center justify-between text-xs font-mono text-[#635F6A] px-1">
         <span>SHOWING {filteredNotes.length} OF {gardenNotes.length} GARDEN LOGS</span>
         <span>GROWTH METRIC: REPRODUCIBLE &amp; TENDED</span>
       </div>
@@ -112,7 +112,7 @@ export function GardenClientView() {
             href={`/blogs/${note.slug}`}
             className="group block"
           >
-            <Card className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 rounded-2xl border-slate-800/80 bg-slate-950/75 p-6 hover:border-indigo-500/50 hover:bg-slate-900/60 transition-all duration-300 backdrop-blur-sm">
+            <Card className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 rounded-3xl border-[#C8C5D0]/30 bg-white p-6 hover:shadow-md transition-all duration-200">
               <div className="flex flex-col gap-3 max-w-2xl">
                 <div className="flex flex-wrap items-center gap-2.5 text-xs">
                   <Badge
@@ -123,24 +123,24 @@ export function GardenClientView() {
                   >
                     {note.stage}
                   </Badge>
-                  <span className="text-slate-400 font-mono text-[11px]">
+                  <span className="text-[#49454F] font-mono text-[11px]">
                     {note.category}
                   </span>
-                  <span className="text-slate-700">/</span>
-                  <span className="text-slate-500 font-mono text-[11px]">
+                  <span className="text-[#C8C5D0]">/</span>
+                  <span className="text-[#635F6A] font-mono text-[11px]">
                     {note.date}
                   </span>
-                  <span className="text-slate-700">/</span>
-                  <span className="text-slate-500 font-mono text-[11px]">
+                  <span className="text-[#C8C5D0]">/</span>
+                  <span className="text-[#635F6A] font-mono text-[11px]">
                     {note.readTime}
                   </span>
                 </div>
 
-                <h2 className="text-lg sm:text-xl font-bold text-white group-hover:text-indigo-300 transition-colors leading-snug">
+                <h2 className="text-lg sm:text-xl font-bold text-[#1D1B20] group-hover:text-[#5954A8] transition-colors leading-snug font-sans">
                   {note.title}
                 </h2>
 
-                <p className="text-sm text-slate-300/85 leading-relaxed">
+                <p className="text-sm text-[#49454F] leading-relaxed">
                   {note.excerpt}
                 </p>
 
@@ -148,7 +148,7 @@ export function GardenClientView() {
                   {note.tags.map((t) => (
                     <span
                       key={t}
-                      className="text-[10px] font-mono text-slate-400 bg-slate-900 border border-slate-800 px-2 py-0.5 rounded"
+                      className="text-[10px] font-mono text-[#635F6A] bg-[#F4F2F8] border border-[#C8C5D0]/30 px-2.5 py-0.5 rounded-full"
                     >
                       #{t}
                     </span>
@@ -157,8 +157,8 @@ export function GardenClientView() {
               </div>
 
               <div className="sm:self-center shrink-0">
-                <div className="inline-flex items-center text-xs font-mono text-slate-400 group-hover:text-indigo-300 transition-colors border border-slate-800 group-hover:border-indigo-500/40 rounded-full px-3.5 py-1.5 bg-slate-900/80">
-                  <span>Inspect note &rarr;</span>
+                <div className="inline-flex items-center text-xs font-mono text-[#5954A8] group-hover:underline px-3.5 py-1.5 rounded-full bg-[#F4F2F8]">
+                  <span>Read note &rarr;</span>
                 </div>
               </div>
             </Card>

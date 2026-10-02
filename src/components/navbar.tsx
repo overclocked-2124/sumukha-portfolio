@@ -14,7 +14,7 @@ const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
   { label: "About", href: "/about" },
-  { label: "Blogs", href: "/blogs" },
+  { label: "Notes", href: "/blogs" },
 ];
 
 export function Navbar() {
@@ -26,21 +26,21 @@ export function Navbar() {
         aria-label="Primary Navigation"
         className={cn(
           "pointer-events-auto flex items-center gap-1.5 p-1.5",
-          "rounded-full border border-slate-700/40 bg-slate-950/85 backdrop-blur-xl",
-          "shadow-xl shadow-black/50 ring-1 ring-white/5",
-          "transition-all duration-300 hover:border-slate-600/50"
+          "rounded-full border border-[#C8C5D0]/40 bg-[#FAF8FD]/90 backdrop-blur-xl",
+          "shadow-sm ring-1 ring-black/5",
+          "transition-all duration-200"
         )}
       >
-        {/* Brand / Identifier */}
+        {/* Brand / Name */}
         <Link
           href="/"
-          className="flex items-center gap-2 pl-3.5 pr-2 py-1.5 text-xs font-mono tracking-widest uppercase text-slate-300 hover:text-white transition-colors"
+          className="flex items-center gap-2 pl-3.5 pr-2 py-1.5 text-xs font-mono tracking-wider uppercase text-[#1D1B20] hover:text-[#5954A8] transition-colors"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-          <span className="font-semibold text-[11px] text-slate-300">Cosmos</span>
+          <span className="w-2 h-2 rounded-full bg-[#5954A8]" />
+          <span className="font-semibold text-xs text-[#1D1B20]">Sumukha</span>
         </Link>
 
-        <div className="h-3.5 w-px bg-slate-800 mx-1" />
+        <div className="h-3.5 w-px bg-[#C8C5D0]/60 mx-1" />
 
         {/* Navigation Links */}
         <ul className="flex items-center gap-1 m-0 p-0 list-none">
@@ -55,23 +55,20 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   className={cn(
-                    "relative flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-200",
+                    "relative flex items-center px-3.5 py-1.5 rounded-full text-xs font-medium tracking-normal transition-all duration-200",
                     isActive
-                      ? "bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 font-medium"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/50"
+                      ? "bg-[#E3DFFF] text-[#140E62] font-semibold"
+                      : "text-[#49454F] hover:text-[#1D1B20] hover:bg-[#EEEBF2]"
                   )}
                 >
                   <span>{item.label}</span>
-                  {isActive && (
-                    <span className="w-1 h-1 rounded-full bg-indigo-400" />
-                  )}
                 </Link>
               </li>
             );
           })}
         </ul>
 
-        <div className="h-3.5 w-px bg-slate-800 mx-1" />
+        <div className="h-3.5 w-px bg-[#C8C5D0]/60 mx-1" />
 
         {/* Resume Trigger */}
         <div className="pl-0.5 pr-1">
