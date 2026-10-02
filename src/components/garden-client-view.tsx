@@ -98,10 +98,10 @@ export function GardenClientView() {
         </div>
       </div>
 
-      {/* Telemetry Stats */}
+      {/* Notes Count */}
       <div className="flex items-center justify-between text-xs font-mono text-[#635F6A] px-1">
-        <span>SHOWING {filteredNotes.length} OF {gardenNotes.length} GARDEN LOGS</span>
-        <span>GROWTH METRIC: REPRODUCIBLE &amp; TENDED</span>
+        <span>SHOWING {filteredNotes.length} OF {gardenNotes.length} NOTES</span>
+        <span>CATEGORIZED BY MATURITY &amp; TOPIC</span>
       </div>
 
       {/* Notes Stream */}

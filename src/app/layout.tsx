@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sumukha Upadhyaya • Portfolio & Digital Garden",
+  title: "Sumukha Upadhyaya • Software Engineer & Researcher",
   description:
-    "Software engineer & student at RVCE and IIT Madras. Systems engineering, backend infrastructure, and web architectures.",
+    "Software engineer and undergraduate student at RVCE and IIT Madras. Systems engineering, distributed infrastructure, and full-stack software development.",
 };
 
 export default function RootLayout({
@@ -32,25 +32,15 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#FAF8FD] text-[#1D1B20] relative selection:bg-[#E3DFFF] selection:text-[#140E62]">
+      <body className="min-h-full flex flex-col bg-[#FAF9FD] text-[#1B1B1F] antialiased selection:bg-[#E3DFFF] selection:text-[#140E62]">
         <MaterialInit />
-        
-        {/* Soft Material You Expressive Ambient Tint Layers */}
-        <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-          {/* Subtle warm lavender glow top */}
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-[#EADDFF]/40 blur-[120px] rounded-full" />
-          {/* Subtle soft sage tint left */}
-          <div className="absolute top-1/3 -left-24 w-[500px] h-[400px] bg-[#D2E7D6]/35 blur-[120px] rounded-full" />
-          {/* Subtle soft peach tint right */}
-          <div className="absolute bottom-10 -right-24 w-[550px] h-[450px] bg-[#FFDCC1]/30 blur-[130px] rounded-full" />
-        </div>
 
         {/* Floating Top Pill Navigation */}
         <Navbar />
 
-        {/* Main Content Area */}
+        {/* Main Editorial Content Container */}
         <TooltipProvider>
-          <main className="flex-1 pt-24 pb-16 px-4 sm:px-6 max-w-5xl mx-auto w-full">
+          <main className="flex-1 pt-28 pb-20 px-4 sm:px-6 max-w-4xl mx-auto w-full">
             {children}
           </main>
         </TooltipProvider>

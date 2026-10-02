@@ -63,10 +63,10 @@ export function ProjectsClientView() {
         </div>
       </div>
 
-      {/* Results Telemetry */}
+      {/* Projects Count */}
       <div className="flex items-center justify-between text-xs font-mono text-[#635F6A] px-1">
         <span>SHOWING {filteredProjects.length} OF {projectList.length} PROJECTS</span>
-        <span>STATUS: PRODUCTION &amp; RESEARCH</span>
+        <span>PRODUCTION CODEBASES &amp; RESEARCH</span>
       </div>
 
       {/* Projects Grid */}
