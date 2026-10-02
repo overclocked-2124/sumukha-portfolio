@@ -8,15 +8,6 @@ import {
   skillsData, 
   leadershipRoles 
 } from "@/data/portfolio-data";
-import { 
-  User, 
-  Compass, 
-  Cpu, 
-  Orbit, 
-  GraduationCap, 
-  Briefcase, 
-  Award, 
-} from "lucide-react";
 
 export default function AboutPage() {
   const tenets = [
@@ -39,11 +30,11 @@ export default function AboutPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div className="flex flex-col gap-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 text-xs font-mono text-indigo-400 tracking-wider uppercase">
-            <User className="w-3.5 h-3.5" />
-            <span>Operator Dossier • Bio &amp; Architecture</span>
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-indigo-400 tracking-widest uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+            <span>Operator Dossier // Bio &amp; Architecture</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-sans">
             Sumukha Upadhyaya
           </h1>
           <p className="text-base text-slate-400 leading-relaxed font-normal">
@@ -59,11 +50,11 @@ export default function AboutPage() {
       {/* Operator Narrative Card */}
       <Card className="rounded-2xl border-slate-800/80 bg-slate-950/75 p-6 sm:p-8 backdrop-blur-sm flex flex-col gap-6">
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-full border border-indigo-500/30 bg-indigo-950/60 flex items-center justify-center text-indigo-400">
-            <Orbit className="w-5 h-5" />
+          <div className="w-10 h-10 rounded-full border border-indigo-500/30 bg-indigo-950/60 flex items-center justify-center text-xs font-mono text-indigo-300 font-bold">
+            SU
           </div>
           <div>
-            <h2 className="text-xl font-bold text-white">{personalInfo.name}</h2>
+            <h2 className="text-xl font-bold text-white font-sans">{personalInfo.name}</h2>
             <span className="text-xs font-mono text-cyan-400">@{personalInfo.githubHandle} • Systems &amp; Low-Level Runtimes</span>
           </div>
         </div>
@@ -85,8 +76,8 @@ export default function AboutPage() {
       {/* Education Section */}
       <section className="flex flex-col gap-5">
         <div className="flex items-center gap-2">
-          <GraduationCap className="w-5 h-5 text-indigo-400" />
-          <h2 className="text-2xl font-bold tracking-tight text-white">Academic Foundation</h2>
+          <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+          <h2 className="text-2xl font-bold tracking-tight text-white font-sans">Academic Foundation</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -123,8 +114,8 @@ export default function AboutPage() {
       {/* Experience History */}
       <section className="flex flex-col gap-5">
         <div className="flex items-center gap-2">
-          <Briefcase className="w-5 h-5 text-cyan-400" />
-          <h2 className="text-2xl font-bold tracking-tight text-white">Industry Experience</h2>
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+          <h2 className="text-2xl font-bold tracking-tight text-white font-sans">Industry Experience</h2>
         </div>
 
         <div className="flex flex-col gap-5">
@@ -140,7 +131,7 @@ export default function AboutPage() {
                 </div>
                 <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
                   <span className="px-2.5 py-0.5 rounded-full bg-slate-900 border border-slate-800">{exp.timeline}</span>
-                  <span className="text-slate-600">•</span>
+                  <span className="text-slate-600">/</span>
                   <span>{exp.type}</span>
                 </div>
               </div>
@@ -172,8 +163,8 @@ export default function AboutPage() {
       {/* Leadership & Organization Roles */}
       <section className="flex flex-col gap-5">
         <div className="flex items-center gap-2">
-          <Award className="w-5 h-5 text-indigo-400" />
-          <h2 className="text-2xl font-bold tracking-tight text-white">Leadership &amp; Community Roles</h2>
+          <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+          <h2 className="text-2xl font-bold tracking-tight text-white font-sans">Leadership &amp; Community Roles</h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -200,8 +191,8 @@ export default function AboutPage() {
       {/* Engineering Tenets */}
       <section className="flex flex-col gap-5">
         <div className="flex items-center gap-2">
-          <Compass className="w-5 h-5 text-cyan-400" />
-          <h2 className="text-2xl font-bold tracking-tight text-white">Engineering Philosophy</h2>
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+          <h2 className="text-2xl font-bold tracking-tight text-white font-sans">Engineering Philosophy</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -217,14 +208,14 @@ export default function AboutPage() {
       {/* Technical Competencies Matrix */}
       <section className="flex flex-col gap-5">
         <div className="flex items-center gap-2">
-          <Cpu className="w-5 h-5 text-indigo-400" />
-          <h2 className="text-2xl font-bold tracking-tight text-white">Technical Domain Matrix</h2>
+          <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+          <h2 className="text-2xl font-bold tracking-tight text-white font-sans">Technical Domain Matrix</h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {/* Languages */}
           <Card className="p-6 rounded-2xl border-slate-800/80 bg-slate-950/75 backdrop-blur-sm flex flex-col gap-3">
-            <span className="text-xs font-mono text-indigo-400 uppercase tracking-wider font-semibold">
+            <span className="text-xs font-mono text-indigo-400 uppercase tracking-widest font-semibold">
               Languages &amp; Runtimes
             </span>
             <div className="flex flex-col gap-2">
@@ -240,7 +231,7 @@ export default function AboutPage() {
           {/* Frameworks & Databases */}
           <div className="flex flex-col gap-5">
             <Card className="p-5 rounded-2xl border-slate-800/80 bg-slate-950/75 backdrop-blur-sm flex flex-col gap-2.5">
-              <span className="text-xs font-mono text-cyan-400 uppercase tracking-wider font-semibold">
+              <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold">
                 Frameworks &amp; Web Architectures
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -253,7 +244,7 @@ export default function AboutPage() {
             </Card>
 
             <Card className="p-5 rounded-2xl border-slate-800/80 bg-slate-950/75 backdrop-blur-sm flex flex-col gap-2.5">
-              <span className="text-xs font-mono text-indigo-400 uppercase tracking-wider font-semibold">
+              <span className="text-xs font-mono text-indigo-400 uppercase tracking-widest font-semibold">
                 Databases &amp; Cloud Infrastructure
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -266,7 +257,7 @@ export default function AboutPage() {
             </Card>
 
             <Card className="p-5 rounded-2xl border-slate-800/80 bg-slate-950/75 backdrop-blur-sm flex flex-col gap-2.5">
-              <span className="text-xs font-mono text-violet-400 uppercase tracking-wider font-semibold">
+              <span className="text-xs font-mono text-violet-400 uppercase tracking-widest font-semibold">
                 Systems, Security &amp; Protocols
               </span>
               <div className="flex flex-wrap gap-1.5">

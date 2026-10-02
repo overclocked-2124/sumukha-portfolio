@@ -28,10 +28,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **Unified Design Tokens**: Map CSS custom properties (`--md-sys-color-*` and `--background`, `--primary`, `--card`, etc.) to the same central cosmic palette in `src/app/globals.css`.
 - **Consistent Radius and Stroke**: Standardize border radius (`rounded-xl` / `corner-l` / `corner-full` for pills) and border opacity across both component families.
 
-## 4. Strict Zero-Emoji Rule
-- **No Emojis Anywhere**: Never use emojis in UI copy, buttons, badges, headers, metadata, or documentation.
-- **Vector Glyphs Only**: Use sleek, minimal, high-precision vector iconography (via `lucide-react` or Material Symbols).
-- **Classy & Editorial Tone**: Maintain a refined, understated, sophisticated space-themed digital garden atmosphere.
+## 4. Strict Zero-Emoji & Icon-Free Restraint Rule
+- **No Emojis or Graphical Clutter**: Never use emojis or decorative icons all around UI copy, buttons, badges, headers, or navigation items.
+- **Pure Typographic & Geometric Discipline**: Rely purely on typography (weight, size, case, letter-spacing) and minimal geometric indicators (dots, slashes, hair-lines).
+- **Classy & Editorial Tone**: Maintain an understated, ultra-clean, sophisticated space-themed atmosphere without pictorial noise.
 
 ## 5. Professional Frontend Craftsmanship
 - **Spatial Rhythm**: Adhere strictly to an 8-point spatial system (spacing units in multiples of 4px/8px: `gap-2`, `gap-4`, `p-6`, `py-8`, `max-w-5xl`).

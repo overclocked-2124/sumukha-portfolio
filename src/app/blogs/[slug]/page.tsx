@@ -3,14 +3,6 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { gardenNotes, GardenNote } from "@/data/portfolio-data";
-import { 
-  ArrowLeft, 
-  Calendar, 
-  Clock, 
-  Orbit, 
-  BookOpen, 
-  ArrowRight
-} from "lucide-react";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -51,10 +43,9 @@ export default async function NotePage({ params }: PageProps) {
       <div className="flex items-center justify-between">
         <Link
           href="/blogs"
-          className="inline-flex items-center gap-2 text-xs font-mono text-slate-400 hover:text-white transition-colors group"
+          className="inline-flex items-center text-xs font-mono text-slate-400 hover:text-white transition-colors group"
         >
-          <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
-          <span>Return to Digital Garden</span>
+          <span>&larr; Return to Digital Garden</span>
         </Link>
 
         <span className="text-xs font-mono text-slate-500">
@@ -74,19 +65,17 @@ export default async function NotePage({ params }: PageProps) {
             {note.stage}
           </Badge>
           <span className="text-slate-400 font-mono text-xs">{note.category}</span>
-          <span className="text-slate-700">•</span>
-          <span className="text-slate-400 font-mono text-xs flex items-center gap-1">
-            <Calendar className="w-3.5 h-3.5 text-slate-500" />
+          <span className="text-slate-700">/</span>
+          <span className="text-slate-400 font-mono text-xs">
             {note.date}
           </span>
-          <span className="text-slate-700">•</span>
-          <span className="text-slate-400 font-mono text-xs flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5 text-slate-500" />
+          <span className="text-slate-700">/</span>
+          <span className="text-slate-400 font-mono text-xs">
             {note.readTime}
           </span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight font-sans">
           {note.title}
         </h1>
 
@@ -114,7 +103,7 @@ export default async function NotePage({ params }: PageProps) {
             return (
               <h2
                 key={idx}
-                className="text-xl sm:text-2xl font-bold text-white tracking-tight mt-6 pt-4 border-t border-slate-800/60"
+                className="text-xl sm:text-2xl font-bold text-white tracking-tight mt-6 pt-4 border-t border-slate-800/60 font-sans"
               >
                 {block.replace("### ", "")}
               </h2>
@@ -160,10 +149,10 @@ export default async function NotePage({ params }: PageProps) {
       </div>
 
       {/* Garden Feedback & Stage Taxonomy Card */}
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 backdrop-blur-sm flex flex-col gap-3 my-6">
-        <div className="flex items-center gap-2 text-indigo-400 text-xs font-mono uppercase tracking-wider">
-          <Orbit className="w-4 h-4" />
-          <span>Note Provenance &amp; Stage: {note.stage}</span>
+      <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 backdrop-blur-sm flex flex-col gap-2 my-6">
+        <div className="flex items-center gap-2 text-indigo-400 text-xs font-mono uppercase tracking-widest">
+          <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+          <span>Note Provenance // Growth Stage: {note.stage}</span>
         </div>
         <p className="text-xs text-slate-400 leading-relaxed">
           This digital garden note reflects working research and engineering implementations. All ideas are version-controlled and revised as systems evolve.
@@ -173,8 +162,7 @@ export default async function NotePage({ params }: PageProps) {
       {/* Related Garden Notes */}
       {relatedNotes.length > 0 && (
         <section className="flex flex-col gap-4 pt-8 border-t border-slate-800">
-          <h3 className="text-lg font-semibold text-white tracking-tight flex items-center gap-2">
-            <BookOpen className="w-4 h-4 text-cyan-400" />
+          <h3 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
             <span>Interconnected Garden Notes</span>
           </h3>
 
@@ -192,8 +180,7 @@ export default async function NotePage({ params }: PageProps) {
                     </h4>
                   </div>
                   <div className="text-xs font-mono text-slate-500 flex items-center gap-1 self-end group-hover:text-white transition-colors">
-                    <span>Inspect</span>
-                    <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+                    <span>Inspect note &rarr;</span>
                   </div>
                 </Card>
               </Link>

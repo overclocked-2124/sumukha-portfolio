@@ -6,13 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { gardenNotes, GardenNote } from "@/data/portfolio-data";
-import { 
-  Search, 
-  ArrowUpRight, 
-  Calendar, 
-  Clock, 
-  Filter
-} from "lucide-react";
 
 export function GardenClientView() {
   const [selectedStage, setSelectedStage] = useState<string>("All");
@@ -55,9 +48,8 @@ export function GardenClientView() {
         {/* Stage Filter */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono text-slate-500 mr-1 flex items-center gap-1">
-              <Filter className="w-3 h-3 text-slate-500" />
-              <span>GROWTH STAGE:</span>
+            <span className="text-xs font-mono text-slate-500 mr-1">
+              GROWTH STAGE:
             </span>
             {stages.map((stage) => (
               <button
@@ -66,7 +58,7 @@ export function GardenClientView() {
                 onClick={() => setSelectedStage(stage)}
                 className={`px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
                   selectedStage === stage
-                    ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 shadow-sm"
+                    ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-medium"
                     : "bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-slate-200"
                 }`}
               >
@@ -75,14 +67,13 @@ export function GardenClientView() {
             ))}
           </div>
 
-          {/* Search Box */}
-          <div className="relative w-full sm:w-64">
-            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none" />
+          {/* Search Box without icon */}
+          <div className="w-full sm:w-64">
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search notes & tags..."
-              className="pl-9 h-8 text-xs font-mono bg-slate-900/80 border-slate-800 text-slate-200 rounded-full focus-visible:ring-indigo-500/30"
+              className="h-8 text-xs font-mono bg-slate-900/80 border-slate-800 text-slate-200 rounded-full focus-visible:ring-indigo-500/30 px-3.5"
             />
           </div>
         </div>
@@ -135,14 +126,12 @@ export function GardenClientView() {
                   <span className="text-slate-400 font-mono text-[11px]">
                     {note.category}
                   </span>
-                  <span className="text-slate-700">•</span>
-                  <span className="text-slate-500 font-mono text-[11px] flex items-center gap-1">
-                    <Calendar className="w-3 h-3 text-slate-500" />
+                  <span className="text-slate-700">/</span>
+                  <span className="text-slate-500 font-mono text-[11px]">
                     {note.date}
                   </span>
-                  <span className="text-slate-700">•</span>
-                  <span className="text-slate-500 font-mono text-[11px] flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-slate-500" />
+                  <span className="text-slate-700">/</span>
+                  <span className="text-slate-500 font-mono text-[11px]">
                     {note.readTime}
                   </span>
                 </div>
@@ -168,9 +157,8 @@ export function GardenClientView() {
               </div>
 
               <div className="sm:self-center shrink-0">
-                <div className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 group-hover:text-indigo-300 transition-colors border border-slate-800 group-hover:border-indigo-500/40 rounded-full px-3.5 py-1.5 bg-slate-900/80">
-                  <span>Inspect note</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <div className="inline-flex items-center text-xs font-mono text-slate-400 group-hover:text-indigo-300 transition-colors border border-slate-800 group-hover:border-indigo-500/40 rounded-full px-3.5 py-1.5 bg-slate-900/80">
+                  <span>Inspect note &rarr;</span>
                 </div>
               </div>
             </Card>

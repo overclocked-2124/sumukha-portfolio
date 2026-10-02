@@ -11,20 +11,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
-  FileText, 
-  ExternalLink, 
-  Mail, 
-  Phone, 
-  Copy, 
-  Check, 
-  Printer, 
-  GraduationCap, 
-  Briefcase, 
-  Code, 
-  Award,
-  Terminal
-} from "lucide-react";
-import { personalInfo, educationList, experienceList, projectList, leadershipRoles } from "@/data/portfolio-data";
+  personalInfo, 
+  educationList, 
+  experienceList, 
+  projectList, 
+  leadershipRoles 
+} from "@/data/portfolio-data";
 
 export function ResumeModal() {
   const [copied, setCopied] = useState(false);
@@ -45,9 +37,8 @@ export function ResumeModal() {
         render={
           <button
             type="button"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium text-slate-300 hover:text-white bg-slate-900/90 border border-slate-700/60 hover:border-indigo-500/50 transition-all cursor-pointer shadow-sm"
+            className="flex items-center px-3 py-1.5 rounded-full text-xs font-mono font-medium text-slate-300 hover:text-white bg-slate-900 border border-slate-700/60 hover:border-indigo-500/50 transition-all cursor-pointer shadow-sm"
           >
-            <FileText className="w-3.5 h-3.5 text-indigo-400" />
             <span>Resume</span>
           </button>
         }
@@ -56,7 +47,7 @@ export function ResumeModal() {
         <DialogHeader className="flex flex-col gap-2 border-b border-slate-800 pb-5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <DialogTitle className="text-2xl font-bold tracking-tight text-white">
+              <DialogTitle className="text-2xl font-bold tracking-tight text-white font-sans">
                 {personalInfo.name}
               </DialogTitle>
               <p className="text-xs font-mono text-indigo-400 mt-1">
@@ -72,7 +63,6 @@ export function ResumeModal() {
                 onClick={handleCopyEmail}
                 className="h-8 rounded-full border-slate-800 bg-slate-900 text-xs font-mono text-slate-300 hover:text-white"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400 mr-1" /> : <Copy className="w-3.5 h-3.5 mr-1" />}
                 {copied ? "Copied" : "Copy Email"}
               </Button>
 
@@ -82,31 +72,26 @@ export function ResumeModal() {
                 onClick={handlePrint}
                 className="h-8 rounded-full border-slate-800 bg-slate-900 text-xs font-mono text-slate-300 hover:text-white"
               >
-                <Printer className="w-3.5 h-3.5 mr-1" />
                 Print / Save
               </Button>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400 pt-2">
-            <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-1 hover:text-indigo-400">
-              <Mail className="w-3.5 h-3.5" />
-              <span>{personalInfo.email}</span>
+            <a href={`mailto:${personalInfo.email}`} className="hover:text-indigo-400">
+              {personalInfo.email}
             </a>
-            <span className="text-slate-700">•</span>
-            <span className="flex items-center gap-1">
-              <Phone className="w-3.5 h-3.5" />
-              <span>{personalInfo.phone}</span>
-            </span>
-            <span className="text-slate-700">•</span>
+            <span className="text-slate-700">/</span>
+            <span>{personalInfo.phone}</span>
+            <span className="text-slate-700">/</span>
             <a href={personalInfo.github} target="_blank" rel="noreferrer" className="hover:text-indigo-400">
               GitHub
             </a>
-            <span className="text-slate-700">•</span>
+            <span className="text-slate-700">/</span>
             <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className="hover:text-indigo-400">
               LinkedIn
             </a>
-            <span className="text-slate-700">•</span>
+            <span className="text-slate-700">/</span>
             <a href={personalInfo.leetcode} target="_blank" rel="noreferrer" className="hover:text-indigo-400">
               LeetCode
             </a>
@@ -117,9 +102,8 @@ export function ResumeModal() {
         <div className="flex flex-col gap-8 py-4 text-xs sm:text-sm">
           {/* Education */}
           <section className="flex flex-col gap-3">
-            <h3 className="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold flex items-center gap-1.5">
-              <GraduationCap className="w-4 h-4" />
-              <span>Education</span>
+            <h3 className="text-xs font-mono uppercase tracking-widest text-indigo-400 font-semibold">
+              Education
             </h3>
 
             <div className="flex flex-col gap-4">
@@ -148,9 +132,8 @@ export function ResumeModal() {
 
           {/* Experience */}
           <section className="flex flex-col gap-3">
-            <h3 className="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold flex items-center gap-1.5">
-              <Briefcase className="w-4 h-4" />
-              <span>Work Experience</span>
+            <h3 className="text-xs font-mono uppercase tracking-widest text-indigo-400 font-semibold">
+              Work Experience
             </h3>
 
             <div className="flex flex-col gap-4">
@@ -183,9 +166,8 @@ export function ResumeModal() {
 
           {/* Key Projects */}
           <section className="flex flex-col gap-3">
-            <h3 className="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold flex items-center gap-1.5">
-              <Terminal className="w-4 h-4" />
-              <span>Featured Technical Projects</span>
+            <h3 className="text-xs font-mono uppercase tracking-widest text-indigo-400 font-semibold">
+              Featured Technical Projects
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -195,8 +177,8 @@ export function ResumeModal() {
                     <div className="flex items-center justify-between">
                       <span className="font-semibold text-white">{proj.title}</span>
                       {proj.repoUrl && (
-                        <a href={proj.repoUrl} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white">
-                          <ExternalLink className="w-3.5 h-3.5" />
+                        <a href={proj.repoUrl} target="_blank" rel="noreferrer" className="text-xs font-mono text-slate-400 hover:text-white">
+                          [Source]
                         </a>
                       )}
                     </div>
@@ -216,9 +198,8 @@ export function ResumeModal() {
 
           {/* Technical Skills */}
           <section className="flex flex-col gap-3">
-            <h3 className="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold flex items-center gap-1.5">
-              <Code className="w-4 h-4" />
-              <span>Skills Matrix</span>
+            <h3 className="text-xs font-mono uppercase tracking-widest text-indigo-400 font-semibold">
+              Skills Matrix
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -243,9 +224,8 @@ export function ResumeModal() {
 
           {/* Organizational Leadership */}
           <section className="flex flex-col gap-3">
-            <h3 className="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold flex items-center gap-1.5">
-              <Award className="w-4 h-4" />
-              <span>Leadership &amp; Community Roles</span>
+            <h3 className="text-xs font-mono uppercase tracking-widest text-indigo-400 font-semibold">
+              Leadership &amp; Community Roles
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

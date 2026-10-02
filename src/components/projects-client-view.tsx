@@ -5,11 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { projectList } from "@/data/portfolio-data";
-import { 
-  GitBranch, 
-  ArrowUpRight, 
-  Search 
-} from "lucide-react";
 
 export function ProjectsClientView() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -48,7 +43,7 @@ export function ProjectsClientView() {
               onClick={() => setSelectedCategory(cat)}
               className={`px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
                 selectedCategory === cat
-                  ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 shadow-sm"
+                  ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-medium"
                   : "bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-slate-200 hover:border-slate-700"
               }`}
             >
@@ -57,14 +52,13 @@ export function ProjectsClientView() {
           ))}
         </div>
 
-        {/* Search Bar */}
-        <div className="relative w-full sm:w-64">
-          <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none" />
+        {/* Search Bar without icon */}
+        <div className="w-full sm:w-64">
           <Input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search systems & stack..."
-            className="pl-9 h-8 text-xs font-mono bg-slate-900/80 border-slate-800 text-slate-200 rounded-full focus-visible:ring-indigo-500/30"
+            placeholder="Filter systems & stack..."
+            className="h-8 text-xs font-mono bg-slate-900/80 border-slate-800 text-slate-200 rounded-full focus-visible:ring-indigo-500/30 px-3.5"
           />
         </div>
       </div>
@@ -86,24 +80,20 @@ export function ProjectsClientView() {
               {/* Header */}
               <div className="flex items-start justify-between gap-4">
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-bold text-white tracking-tight group-hover:text-indigo-300 transition-colors">
-                      {project.title}
-                    </h3>
-                  </div>
+                  <h3 className="text-lg font-bold text-white tracking-tight group-hover:text-indigo-300 transition-colors">
+                    {project.title}
+                  </h3>
                   <span className="text-xs font-mono text-cyan-400/90 leading-tight">
                     {project.tagline}
                   </span>
                 </div>
 
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <Badge
-                    variant="outline"
-                    className="rounded-full text-[10px] font-mono border-slate-800 bg-slate-900/90 text-slate-400 px-2.5 py-0.5"
-                  >
-                    {project.status}
-                  </Badge>
-                </div>
+                <Badge
+                  variant="outline"
+                  className="rounded-full text-[10px] font-mono border-slate-800 bg-slate-900/90 text-slate-400 px-2.5 py-0.5 shrink-0"
+                >
+                  {project.status}
+                </Badge>
               </div>
 
               {/* Description */}
@@ -111,10 +101,10 @@ export function ProjectsClientView() {
                 {project.description}
               </p>
 
-              {/* Architectural Highlights */}
+              {/* Architectural Invariants */}
               {project.highlights && project.highlights.length > 0 && (
                 <div className="flex flex-col gap-1.5 p-3 rounded-xl bg-slate-900/50 border border-slate-800/60 mt-1">
-                  <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">
+                  <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
                     Architectural Invariants
                   </span>
                   <ul className="list-none p-0 m-0 flex flex-col gap-1 text-xs text-slate-400">
@@ -153,19 +143,17 @@ export function ProjectsClientView() {
                     href={project.repoUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-300 hover:text-white transition-colors px-3 py-1 rounded-full bg-slate-900 border border-slate-800 hover:border-slate-700"
+                    className="inline-flex items-center text-xs font-mono text-slate-300 hover:text-white transition-colors px-3 py-1 rounded-full bg-slate-900 border border-slate-800 hover:border-slate-700"
                   >
-                    <GitBranch className="w-3.5 h-3.5 text-indigo-400" />
-                    <span>Source</span>
+                    Source Code
                   </a>
                 )}
                 {project.demoUrl && (
                   <a
                     href={project.demoUrl}
-                    className="inline-flex items-center gap-1.5 text-xs font-mono text-indigo-300 hover:text-white transition-colors px-3 py-1 rounded-full bg-indigo-950/60 border border-indigo-500/30 hover:border-indigo-500/60"
+                    className="inline-flex items-center text-xs font-mono text-indigo-300 hover:text-white transition-colors px-3 py-1 rounded-full bg-indigo-950/60 border border-indigo-500/30 hover:border-indigo-500/60"
                   >
-                    <ArrowUpRight className="w-3.5 h-3.5 text-indigo-400" />
-                    <span>Preview</span>
+                    Live Demo
                   </a>
                 )}
               </div>
