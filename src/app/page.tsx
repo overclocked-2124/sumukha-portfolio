@@ -4,75 +4,56 @@ import { Card } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { 
+  personalInfo, 
+  projectList, 
+  gardenNotes, 
+  experienceList 
+} from "@/data/portfolio-data";
+import { 
   ArrowRight, 
   Terminal, 
   Orbit, 
-  Compass, 
   FolderGit2, 
-  BookOpen 
+  BookOpen, 
+  GitBranch, 
+  Briefcase, 
+  Mail, 
+  ExternalLink 
 } from "lucide-react";
 
 export default function Home() {
-  const gardenNotes = [
-    {
-      title: "Distributed Consensus in Deep Space Networks",
-      stage: "Evergreen",
-      category: "Systems",
-      readTime: "6 min read",
-      date: "Oct 2026",
-      summary: "Exploring latency-tolerant routing mechanisms and synchronization patterns across high-propagation delay clusters.",
-    },
-    {
-      title: "Deterministic Runtime Environments & Sandboxing",
-      stage: "Budding",
-      category: "Security",
-      readTime: "8 min read",
-      date: "Sep 2026",
-      summary: "A breakdown of microVM isolation primitives, memory fences, and capability-based access models.",
-    },
-    {
-      title: "Synthesizing Design Tokens with Material 3 & Tailwind",
-      stage: "Seedling",
-      category: "Architecture",
-      readTime: "4 min read",
-      date: "Sep 2026",
-      summary: "Architecting a unified design token pipeline bridging component primitives and custom web elements.",
-    },
-  ];
+  const featuredProjects = projectList.filter((p) => p.featured);
+  const featuredNotes = gardenNotes.slice(0, 3);
 
-  const featuredProjects = [
-    {
-      title: "ChipCheck",
-      description: "Hardware verification telemetry and microarchitecture instruction analysis engine.",
-      tags: ["TypeScript", "Next.js", "Analysis"],
-      stats: "Private Core",
-      href: "/projects",
-    },
-    {
-      title: "pennant",
-      description: "Distributed feature flagging and high-throughput evaluation daemon built for low-latency nodes.",
-      tags: ["Distributed Systems", "Go", "Observability"],
-      stats: "Distributed",
-      href: "/projects",
-    },
-  ];
+  const getStageColor = (stage: string) => {
+    switch (stage) {
+      case "Seedling":
+        return "border-emerald-500/30 bg-emerald-500/10 text-emerald-400";
+      case "Budding":
+        return "border-amber-500/30 bg-amber-500/10 text-amber-400";
+      case "Evergreen":
+        return "border-indigo-500/30 bg-indigo-500/10 text-indigo-300";
+      default:
+        return "border-slate-700 bg-slate-800 text-slate-300";
+    }
+  };
 
   return (
     <div className="flex flex-col gap-16 py-8">
       {/* Hero Section */}
-      <section className="relative flex flex-col items-start gap-6 pt-6 sm:pt-12">
+      <section className="relative flex flex-col items-start gap-6 pt-6 sm:pt-10">
         {/* Status Chip / Pill */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-500/25 bg-indigo-950/40 text-xs font-mono text-indigo-300 backdrop-blur-md">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-950/40 text-xs font-mono text-indigo-300 backdrop-blur-md">
           <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-          <span>ORBITAL STAGE • ACTIVE RESEARCH</span>
+          <span>ORBITAL STAGE • ACTIVE SYSTEMS RESEARCH &amp; ARCHITECTURE</span>
         </div>
 
         <div className="flex flex-col gap-4 max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight">
-            Cultivating systems, architecture, and ideas in deep space.
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            Cultivating systems, low-level runtimes, and ideas in deep space.
           </h1>
-          <p className="text-lg sm:text-xl text-slate-400 font-normal leading-relaxed">
-            Welcome to my digital garden and technical workshop. A curated locus for interconnected notes, software architectures, exploratory seedlings, and production artifacts.
+          <p className="text-lg sm:text-xl text-slate-300/90 font-normal leading-relaxed">
+            Welcome to the digital garden of <span className="text-white font-medium">{personalInfo.name}</span>. A curated space for kernel-free telemetry, distributed infrastructure, living research seedlings, and high-craft interfaces.
           </p>
         </div>
 
@@ -82,10 +63,10 @@ export default function Home() {
             href="/projects"
             className={cn(
               buttonVariants({ variant: "default" }),
-              "rounded-full bg-indigo-500 text-white hover:bg-indigo-600 transition-colors shadow-lg shadow-indigo-500/20 px-6 flex items-center gap-2"
+              "rounded-full bg-indigo-500 text-white hover:bg-indigo-600 transition-all shadow-lg shadow-indigo-500/25 px-6 flex items-center gap-2 cursor-pointer"
             )}
           >
-            <span>View Projects</span>
+            <span>Explore Systems</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
 
@@ -93,32 +74,130 @@ export default function Home() {
             href="/blogs"
             className={cn(
               buttonVariants({ variant: "outline" }),
-              "rounded-full border-slate-700/60 bg-slate-900/60 text-slate-300 hover:text-white hover:bg-slate-800/80 px-6 backdrop-blur-md flex items-center gap-2"
+              "rounded-full border-slate-700/70 bg-slate-900/60 text-slate-300 hover:text-white hover:bg-slate-800/80 px-6 backdrop-blur-md flex items-center gap-2 cursor-pointer"
             )}
           >
             <BookOpen className="w-4 h-4 text-slate-400" />
-            <span>Explore Garden</span>
+            <span>Garden Notes</span>
+          </Link>
+
+          <Link
+            href="/about"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "rounded-full border-slate-800 bg-slate-950/40 text-slate-400 hover:text-white px-5 backdrop-blur-md flex items-center gap-1.5 cursor-pointer"
+            )}
+          >
+            <span>Operator Dossier</span>
           </Link>
         </div>
 
         {/* Telemetry Stats Strip */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full mt-6 pt-8 border-t border-slate-800/60">
-          <div className="flex flex-col gap-1 p-3 rounded-xl bg-slate-900/40 border border-slate-800/40">
-            <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">Garden Notes</span>
-            <span className="text-2xl font-bold text-slate-200">24+</span>
+          <div className="flex flex-col gap-1 p-3.5 rounded-xl bg-slate-900/40 border border-slate-800/40">
+            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">RVCE Engineering</span>
+            <span className="text-2xl font-bold text-slate-100">9.69 <span className="text-xs text-slate-500 font-mono">CGPA</span></span>
           </div>
-          <div className="flex flex-col gap-1 p-3 rounded-xl bg-slate-900/40 border border-slate-800/40">
-            <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">Repositories</span>
-            <span className="text-2xl font-bold text-indigo-400">80+</span>
+          <div className="flex flex-col gap-1 p-3.5 rounded-xl bg-slate-900/40 border border-slate-800/40">
+            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">IIT Madras Data Sci</span>
+            <span className="text-2xl font-bold text-indigo-400">9.15 <span className="text-xs text-slate-500 font-mono">GPA</span></span>
           </div>
-          <div className="flex flex-col gap-1 p-3 rounded-xl bg-slate-900/40 border border-slate-800/40">
-            <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">Primary Stack</span>
-            <span className="text-2xl font-bold text-cyan-400">TS / Next</span>
+          <div className="flex flex-col gap-1 p-3.5 rounded-xl bg-slate-900/40 border border-slate-800/40">
+            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">GitHub Repos</span>
+            <span className="text-2xl font-bold text-cyan-400">50+ <span className="text-xs text-slate-500 font-mono">Public</span></span>
           </div>
-          <div className="flex flex-col gap-1 p-3 rounded-xl bg-slate-900/40 border border-slate-800/40">
-            <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">Design System</span>
-            <span className="text-2xl font-bold text-violet-400">M3 + shadcn</span>
+          <div className="flex flex-col gap-1 p-3.5 rounded-xl bg-slate-900/40 border border-slate-800/40">
+            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">Engineering Internships</span>
+            <span className="text-2xl font-bold text-violet-400">3 <span className="text-xs text-slate-500 font-mono">Completed</span></span>
           </div>
+        </div>
+      </section>
+
+      {/* Featured Systems Showcase */}
+      <section className="flex flex-col gap-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <FolderGit2 className="w-5 h-5 text-indigo-400" />
+            <h2 className="text-2xl font-bold tracking-tight text-white">Highlighted Systems</h2>
+          </div>
+          <Link
+            href="/projects"
+            className="group flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-indigo-400 transition-colors"
+          >
+            <span>View all {projectList.length} systems</span>
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {featuredProjects.map((project) => (
+            <Card
+              key={project.slug}
+              className="flex flex-col justify-between rounded-2xl border-slate-800/80 bg-slate-950/75 p-6 hover:border-indigo-500/40 hover:bg-slate-900/60 transition-all duration-300 backdrop-blur-sm group"
+            >
+              <div className="flex flex-col gap-3.5">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-col gap-1">
+                    <h3 className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors">
+                      {project.title}
+                    </h3>
+                    <span className="text-xs font-mono text-cyan-400/90 leading-tight">
+                      {project.tagline}
+                    </span>
+                  </div>
+
+                  <Badge
+                    variant="outline"
+                    className="text-[10px] font-mono border-slate-800 bg-slate-900 px-2 py-0.5 text-slate-400 shrink-0"
+                  >
+                    {project.status}
+                  </Badge>
+                </div>
+
+                <p className="text-sm text-slate-300/85 leading-relaxed">
+                  {project.description}
+                </p>
+
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {project.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-[11px] font-mono text-slate-400 bg-slate-900/90 border border-slate-800 px-2.5 py-0.5 rounded-full"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between pt-5 mt-5 border-t border-slate-800/80">
+                <span className="text-xs font-mono text-slate-500">
+                  {project.category}
+                </span>
+
+                <div className="flex items-center gap-3">
+                  {project.repoUrl && (
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-white transition-colors"
+                    >
+                      <GitBranch className="w-3.5 h-3.5 text-indigo-400" />
+                      <span>Source</span>
+                    </a>
+                  )}
+                  <Link
+                    href={`/projects`}
+                    className="inline-flex items-center gap-1 text-xs font-mono text-indigo-400 hover:text-indigo-300"
+                  >
+                    <span>Details</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </Card>
+          ))}
         </div>
       </section>
 
@@ -126,12 +205,12 @@ export default function Home() {
       <section className="flex flex-col gap-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <Orbit className="w-5 h-5 text-indigo-400" />
-            <h2 className="text-2xl font-semibold tracking-tight text-white">Recent Garden Sprouts</h2>
+            <Orbit className="w-5 h-5 text-cyan-400" />
+            <h2 className="text-2xl font-bold tracking-tight text-white">Living Garden Logbook</h2>
           </div>
           <Link
             href="/blogs"
-            className="group flex items-center gap-1.5 text-xs font-medium text-slate-400 hover:text-indigo-400 transition-colors"
+            className="group flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-cyan-400 transition-colors"
           >
             <span>All garden notes</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -139,135 +218,132 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {gardenNotes.map((note) => (
-            <Card
-              key={note.title}
-              className="group flex flex-col justify-between rounded-2xl border-slate-800/80 bg-slate-950/60 p-5 hover:border-indigo-500/40 hover:bg-slate-900/60 transition-all duration-300 backdrop-blur-sm"
-            >
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-between text-xs">
-                  <Badge
-                    variant="outline"
-                    className="border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-[11px] font-mono rounded-full px-2.5 py-0.5"
-                  >
-                    {note.stage}
-                  </Badge>
-                  <span className="text-slate-500 font-mono text-[11px]">{note.date}</span>
+          {featuredNotes.map((note) => (
+            <Link key={note.slug} href={`/blogs/${note.slug}`} className="group block">
+              <Card className="flex flex-col justify-between h-full rounded-2xl border-slate-800/80 bg-slate-950/75 p-5 hover:border-indigo-500/50 hover:bg-slate-900/60 transition-all duration-300 backdrop-blur-sm">
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between text-xs">
+                    <Badge
+                      variant="outline"
+                      className={`text-[10px] font-mono rounded-full px-2.5 py-0.5 ${getStageColor(
+                        note.stage
+                      )}`}
+                    >
+                      {note.stage}
+                    </Badge>
+                    <span className="text-slate-500 font-mono text-[11px]">{note.date}</span>
+                  </div>
+
+                  <h3 className="text-base font-semibold text-slate-200 group-hover:text-indigo-300 transition-colors leading-snug">
+                    {note.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    {note.excerpt}
+                  </p>
                 </div>
 
-                <h3 className="text-base font-semibold text-slate-200 group-hover:text-white transition-colors leading-snug">
-                  {note.title}
-                </h3>
-
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  {note.summary}
-                </p>
-              </div>
-
-              <div className="flex items-center justify-between pt-4 mt-4 border-t border-slate-900 text-xs font-mono text-slate-500">
-                <span>{note.category}</span>
-                <span>{note.readTime}</span>
-              </div>
-            </Card>
+                <div className="flex items-center justify-between pt-4 mt-4 border-t border-slate-900 text-xs font-mono text-slate-500">
+                  <span>{note.category}</span>
+                  <span className="flex items-center gap-1 text-slate-400 group-hover:text-indigo-300">
+                    <span>Read</span>
+                    <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </div>
+              </Card>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* Featured Projects Showcase */}
+      {/* Experience Timeline Preview */}
       <section className="flex flex-col gap-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <FolderGit2 className="w-5 h-5 text-cyan-400" />
-            <h2 className="text-2xl font-semibold tracking-tight text-white">Highlighted Systems</h2>
+            <Briefcase className="w-5 h-5 text-indigo-400" />
+            <h2 className="text-2xl font-bold tracking-tight text-white">Experience &amp; Industry Impact</h2>
           </div>
           <Link
-            href="/projects"
-            className="group flex items-center gap-1.5 text-xs font-medium text-slate-400 hover:text-cyan-400 transition-colors"
+            href="/about"
+            className="group flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-indigo-400 transition-colors"
           >
-            <span>All projects</span>
+            <span>Full biography &amp; history</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {featuredProjects.map((project) => (
-            <Card
-              key={project.title}
-              className="rounded-2xl border-slate-800/80 bg-slate-950/60 p-6 hover:border-cyan-500/40 hover:bg-slate-900/60 transition-all duration-300 backdrop-blur-sm flex flex-col justify-between"
-            >
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Terminal className="w-4 h-4 text-cyan-400" />
-                    <h3 className="text-lg font-semibold text-white">{project.title}</h3>
-                  </div>
-                  <span className="text-[11px] font-mono text-slate-500 border border-slate-800 rounded px-2 py-0.5">
-                    {project.stats}
-                  </span>
+        <div className="flex flex-col gap-4">
+          {experienceList.map((exp, idx) => (
+            <Card key={idx} className="p-6 rounded-2xl border-slate-800/80 bg-slate-950/70 backdrop-blur-sm flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+              <div className="flex flex-col gap-2 max-w-2xl">
+                <div className="flex items-baseline gap-2">
+                  <h3 className="text-lg font-bold text-white">{exp.company}</h3>
+                  <span className="text-xs font-mono text-slate-500">• {exp.type}</span>
                 </div>
-
-                <p className="text-sm text-slate-400 leading-relaxed">
-                  {project.description}
+                <span className="text-xs font-mono text-indigo-400">{exp.role}</span>
+                <p className="text-xs text-slate-300 leading-relaxed mt-1">
+                  {exp.bullets[0]}
                 </p>
-              </div>
-
-              <div className="flex items-center justify-between pt-5 mt-4 border-t border-slate-900">
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="text-[11px] font-mono text-slate-400 bg-slate-900 border border-slate-800 rounded px-2 py-0.5"
-                    >
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {exp.techStack.slice(0, 5).map((t) => (
+                    <span key={t} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400">
                       {t}
                     </span>
                   ))}
                 </div>
-                <Link
-                  href={project.href}
-                  className="text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
-                >
-                  Inspect <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+              </div>
+
+              <div className="shrink-0 text-xs font-mono text-slate-400 border border-slate-800 bg-slate-900/60 rounded-full px-3 py-1 self-start">
+                {exp.timeline}
               </div>
             </Card>
           ))}
         </div>
       </section>
 
-      {/* Core Philosophies / Garden Rules */}
-      <section className="rounded-2xl border border-slate-800/80 bg-gradient-to-b from-slate-900/40 to-slate-950/80 p-8 backdrop-blur-sm">
-        <div className="flex flex-col gap-4">
+      {/* Dispatch & Telemetry Contact Section */}
+      <section className="rounded-2xl border border-slate-800/80 bg-gradient-to-b from-slate-900/50 to-slate-950/90 p-8 sm:p-10 backdrop-blur-sm flex flex-col gap-6">
+        <div className="flex flex-col gap-2 max-w-2xl">
           <div className="flex items-center gap-2 text-indigo-400 text-xs font-mono tracking-wider uppercase">
-            <Compass className="w-4 h-4" />
-            <span>Digital Garden Taxonomy</span>
+            <Terminal className="w-4 h-4" />
+            <span>Direct Transmission Channel</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-semibold text-white">
-            Information Architecture &amp; Growth Stages
+          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Initiate Contact with the Station
           </h2>
-          <p className="text-sm text-slate-400 leading-relaxed max-w-2xl">
-            Unlike traditional static portfolios or chronological blogs, this space is organized as an organic garden: ideas evolve from initial observations to structured architectural frameworks.
+          <p className="text-sm text-slate-300 leading-relaxed">
+            Interested in collaborating on low-level systems, distributed infrastructure, or full-stack architectures? Reach out directly via encrypted dispatch or professional networks.
           </p>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2">
-            <div className="flex flex-col gap-2 p-4 rounded-xl bg-slate-900/50 border border-slate-800/60">
-              <span className="text-xs font-mono font-medium text-emerald-400">Seedling</span>
-              <p className="text-xs text-slate-400">
-                Early-stage fragments, rough notes, initial questions, and emerging hunches.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2 p-4 rounded-xl bg-slate-900/50 border border-slate-800/60">
-              <span className="text-xs font-mono font-medium text-amber-400">Budding</span>
-              <p className="text-xs text-slate-400">
-                Synthesized concepts with supporting experiments, benchmarks, and architectural designs.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2 p-4 rounded-xl bg-slate-900/50 border border-slate-800/60">
-              <span className="text-xs font-mono font-medium text-indigo-400">Evergreen</span>
-              <p className="text-xs text-slate-400">
-                Mature, referenced essays and production-verified engineering patterns.
-              </p>
-            </div>
-          </div>
+        <div className="flex flex-wrap items-center gap-3 pt-2">
+          <a
+            href={`mailto:${personalInfo.email}`}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono bg-indigo-500 text-white hover:bg-indigo-600 transition-colors shadow-lg shadow-indigo-500/20"
+          >
+            <Mail className="w-4 h-4" />
+            <span>Send Email ({personalInfo.email})</span>
+          </a>
+
+          <a
+            href={personalInfo.github}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-mono bg-slate-900 border border-slate-700/60 text-slate-300 hover:text-white transition-colors"
+          >
+            <GitBranch className="w-4 h-4 text-indigo-400" />
+            <span>GitHub Profile</span>
+          </a>
+
+          <a
+            href={personalInfo.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-mono bg-slate-900 border border-slate-700/60 text-slate-300 hover:text-white transition-colors"
+          >
+            <ExternalLink className="w-4 h-4 text-cyan-400" />
+            <span>LinkedIn</span>
+          </a>
         </div>
       </section>
     </div>

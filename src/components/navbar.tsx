@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Sparkles, Home, Layers, User, BookOpen } from "lucide-react";
+import { ResumeModal } from "@/components/resume-modal";
 
 interface NavItem {
   label: string;
@@ -27,8 +28,8 @@ export function Navbar() {
         aria-label="Primary Navigation"
         className={cn(
           "pointer-events-auto flex items-center gap-1 p-1.5",
-          "rounded-full border border-slate-700/40 bg-slate-950/80 backdrop-blur-xl",
-          "shadow-lg shadow-black/40 ring-1 ring-white/5",
+          "rounded-full border border-slate-700/40 bg-slate-950/85 backdrop-blur-xl",
+          "shadow-xl shadow-black/50 ring-1 ring-white/5",
           "transition-all duration-300 hover:border-slate-600/50"
         )}
       >
@@ -57,7 +58,7 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   className={cn(
-                    "relative flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-200",
+                    "relative flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-200",
                     isActive
                       ? "bg-indigo-500/15 text-indigo-300 shadow-sm border border-indigo-500/30"
                       : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/40"
@@ -73,6 +74,13 @@ export function Navbar() {
             );
           })}
         </ul>
+
+        <div className="h-4 w-px bg-slate-800 mx-1 hidden sm:block" />
+
+        {/* Resume Trigger */}
+        <div className="pl-0.5 pr-1">
+          <ResumeModal />
+        </div>
       </nav>
     </header>
   );
