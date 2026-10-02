@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Space-Themed Digital Garden & Portfolio
+
+A modern personal portfolio and digital garden built with Next.js (App Router), TypeScript, and Tailwind CSS. Prepared for deployment on Vercel.
 
 ## Getting Started
 
