@@ -7,9 +7,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-sans: var(--font-geist-sans), "Helvetica Neue", sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
+  --font-heading: var(--font-geist-sans), sans-serif;
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -26,154 +27,231 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.5);
-  --radius-md: calc(var(--radius) * 0.75);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.25);
-  --radius-2xl: calc(var(--radius) * 1.5);
-  --radius-3xl: calc(var(--radius) * 1.75);
-  --radius-4xl: calc(var(--radius) * 2);
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-2xl: 12px;
 }
 
 :root {
-  /* Google Material You 3 Expressive Pastel Palette */
-  --background: #FAF8FD;
-  --foreground: #1D1B20;
-  
-  --card: #FFFFFF;
-  --card-foreground: #1D1B20;
-  
-  --popover: #FFFFFF;
-  --popover-foreground: #1D1B20;
-  
-  /* Primary: Expressive Iris / Lavender */
-  --primary: #5954A8;
-  --primary-foreground: #FFFFFF;
-  
-  /* Secondary: Soft Slate Mauve */
-  --secondary: #E4E0F8;
-  --secondary-foreground: #1C192B;
-  
-  /* Muted: Soft Neutral Tint */
-  --muted: #F2EEF6;
-  --muted-foreground: #635F6A;
-  
-  /* Accent: Pastel Container Tint */
-  --accent: #E8E4F8;
-  --accent-foreground: #19154E;
-  
-  --destructive: #BA1A1A;
-  --border: rgba(121, 116, 126, 0.16);
-  --input: rgba(121, 116, 126, 0.22);
-  --ring: #5954A8;
-  --radius: 1.25rem;
+  /* Teenage Engineering / Braun Industrial Palette — Measured >= 4.5:1 Contrast */
+  --background: #EFEDE6;
+  --foreground: #141517;
 
-  /* Google Material 3 System Tokens Harmonized */
-  --md-sys-color-primary: #5954A8;
-  --md-sys-color-on-primary: #FFFFFF;
-  --md-sys-color-primary-container: #E3DFFF;
-  --md-sys-color-on-primary-container: #140E62;
-  
-  --md-sys-color-secondary: #5F5C71;
-  --md-sys-color-on-secondary: #FFFFFF;
-  --md-sys-color-secondary-container: #E4E0F8;
-  --md-sys-color-on-secondary-container: #1C192B;
+  --card: #FAF9F5;
+  --card-foreground: #141517;
 
-  --md-sys-color-tertiary: #7A5368;
-  --md-sys-color-on-tertiary: #FFFFFF;
-  --md-sys-color-tertiary-container: #FFD8EA;
-  --md-sys-color-on-tertiary-container: #301123;
-  
-  --md-sys-color-surface: #FAF8FD;
-  --md-sys-color-surface-dim: #DCD9E0;
-  --md-sys-color-surface-bright: #FAF8FD;
-  --md-sys-color-surface-container-lowest: #FFFFFF;
-  --md-sys-color-surface-container-low: #F4F2F8;
-  --md-sys-color-surface-container: #EEEBF2;
-  --md-sys-color-surface-container-high: #E8E5EC;
-  --md-sys-color-surface-container-highest: #E2DFE6;
-  
-  --md-sys-color-on-surface: #1D1B20;
-  --md-sys-color-on-surface-variant: #49454F;
-  --md-sys-color-outline: #79747E;
-  --md-sys-color-outline-variant: #C8C5D0;
-  
-  --md-sys-shape-corner-none: 0px;
-  --md-sys-shape-corner-xs: 4px;
-  --md-sys-shape-corner-s: 8px;
-  --md-sys-shape-corner-m: 12px;
-  --md-sys-shape-corner-l: 16px;
-  --md-sys-shape-corner-xl: 28px;
-  --md-sys-shape-corner-full: 9999px;
+  --popover: #FAF9F5;
+  --popover-foreground: #141517;
 
-  --md-ref-typeface-brand: var(--font-sans, system-ui);
-  --md-ref-typeface-plain: var(--font-sans, system-ui);
+  /* Deep Bead-Blasted Charcoal */
+  --primary: #141517;
+  --primary-foreground: #FAF9F5;
+
+  /* Hardware Signal Orange:
+     --signal-fill (#FF4F00) pairs with #141517 ink (5.54:1) & graphics (>= 3.0:1).
+     --signal-text (#B43900) passes >= 4.55:1 text contrast on #FAF9F5, #EFEDE6, and #E4E1D8. */
+  --signal-fill: #FF4F00;
+  --signal-text: #B43900;
+
+  /* Recessed Aluminum Tray */
+  --secondary: #E4E1D8;
+  --secondary-foreground: #141517;
+
+  /* Warm Technical Graphite (6.08:1–7.55:1 across all surfaces) */
+  --muted: #E4E1D8;
+  --muted-foreground: #52514C;
+
+  --accent: #E4E1D8;
+  --accent-foreground: #141517;
+
+  --destructive: #9F2F2D;
+  --border: #D5D1C5;
+  --input: #D5D1C5;
+  --ring: #B43900;
+  --radius: 0.5rem;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
   }
-  body {
-    @apply bg-background text-foreground antialiased selection:bg-[#E3DFFF] selection:text-[#140E62];
-    min-height: 100vh;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  }
+
   html {
     color-scheme: light;
+    scroll-padding-block-start: 4.5rem;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (pointer: fine) {
+    html {
+      overscroll-behavior: none;
+    }
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    min-height: 100dvh;
+    line-height: 1.6;
+    caret-color: var(--signal-fill);
+    text-underline-position: from-font;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  [tabindex]:not([tabindex="-1"]):focus-visible {
+    outline: 2px solid var(--signal-text);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: #FF4F00;
+    color: #141517;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #E4E1D8;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #B5B1A4;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #52514C;
   }
 }
 
-/* Material 3 Web Component overrides */
-md-outlined-button,
-md-filled-button,
-md-text-button {
-  --md-filled-button-container-shape: 9999px;
-  --md-outlined-button-container-shape: 9999px;
-  --md-text-button-container-shape: 9999px;
-  font-family: inherit;
-  font-weight: 500;
-  letter-spacing: 0.01em;
+/* Tactile Hardware Surfaces (better-ui: explicit transitions, 150ms ease-out press feedback) */
+.te-surface {
+  background-color: rgba(250, 249, 245, 0.96);
+  border: 1px solid #D5D1C5;
+  border-radius: 10px;
+  box-shadow:
+    0 12px 32px -12px rgba(20, 21, 23, 0.08),
+    0 2px 6px -1px rgba(20, 21, 23, 0.04),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.75);
 }
 
-md-filter-chip,
-md-assist-chip {
-  --md-filter-chip-container-shape: 9999px;
-  --md-assist-chip-container-shape: 9999px;
-  --md-filter-chip-outline-color: rgba(121, 116, 126, 0.2);
-  --md-filter-chip-selected-container-color: #E3DFFF;
-  --md-filter-chip-selected-label-text-color: #140E62;
-  font-family: inherit;
-  font-size: 0.8125rem;
+.te-btn {
+  touch-action: manipulation;
+  transition-property: background-color, border-color, color, transform, opacity, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 
-/* Pastel tonal container helpers */
-.m3-surface-low {
-  background-color: #F4F2F8;
+.te-btn:not(:disabled):active {
+  transform: scale(0.96);
 }
-.m3-surface-container {
-  background-color: #EEEBF2;
+
+@keyframes teSheetOpacityIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-.m3-surface-high {
-  background-color: #E8E5EC;
+
+@keyframes teSheetSlideIn {
+  from {
+    opacity: 0;
+    transform: translate3d(18px, 0, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
-.m3-pastel-lavender {
-  background-color: #E3DFFF;
-  color: #140E62;
+
+.te-sheet-enter {
+  animation: teSheetOpacityIn 150ms ease-out forwards;
 }
-.m3-pastel-sage {
-  background-color: #D2E7D6;
-  color: #0F381E;
+
+@media (prefers-reduced-motion: no-preference) {
+  .te-sheet-enter {
+    animation: teSheetSlideIn 240ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
 }
-.m3-pastel-peach {
-  background-color: #FFDCC1;
-  color: #2E1500;
+
+.te-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 7px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: #141517;
+  background-color: #EFEDE6;
+  border: 1px solid #D5D1C5;
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  white-space: nowrap;
 }
-.m3-pastel-rose {
-  background-color: #FFD8EA;
-  color: #301123;
+
+/* Spot Pastel Status Badges (>= 5.9:1 text contrast verified) */
+.badge-pastel-green {
+  background-color: #E8F2E6;
+  color: #265129;
+  border: 1px solid rgba(38, 81, 41, 0.22);
 }
-.m3-pastel-sky {
-  background-color: #CCE5FF;
-  color: #001E30;
+
+.badge-pastel-blue {
+  background-color: #DFEFFC;
+  color: #185680;
+  border: 1px solid rgba(24, 86, 128, 0.22);
+}
+
+.badge-pastel-yellow {
+  background-color: #F9EED0;
+  color: #7A5200;
+  border: 1px solid rgba(122, 82, 0, 0.22);
+}
+
+/* Clean Resume Print Output */
+@media print {
+  body {
+    background: #FFFFFF !important;
+  }
+
+  [data-slot="dialog-overlay"] {
+    display: none !important;
+  }
+
+  [data-slot="dialog-content"] {
+    position: static !important;
+    transform: none !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    background: #FFFFFF !important;
+  }
+
+  [data-print-hide="true"] {
+    display: none !important;
+  }
 }

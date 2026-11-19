@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { MaterialInit } from "@/components/material-init";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { AppShell } from "@/components/app-shell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,10 +14,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "Sumukha Upadhyaya • Software Engineer & Researcher",
+  title: "Sumukha Upadhyaya — Systems & Backend Engineer",
   description:
-    "Software engineer and undergraduate student at RVCE and IIT Madras. Systems engineering, distributed infrastructure, and full-stack software development.",
+    "Interactive 3D modular PC hardware portfolio of Sumukha Upadhyaya. Systems & backend engineer at RVCE (9.69 CGPA) and IIT Madras (9.15 GPA).",
 };
 
 export default function RootLayout({
@@ -30,23 +35,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#FAF9FD] text-[#1B1B1F] antialiased selection:bg-[#E3DFFF] selection:text-[#140E62]">
-        <MaterialInit />
+      <body className="min-h-dvh flex flex-col bg-[#EFEDE6] text-[#141517] antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-3 focus:py-1.5 focus:bg-[#141517] focus:text-[#FAF9F5] focus:font-mono focus:text-xs rounded-sm"
+        >
+          Skip to main content
+        </a>
 
-        {/* Floating Top Pill Navigation */}
-        <Navbar />
-
-        {/* Main Editorial Content Container */}
         <TooltipProvider>
-          <main className="flex-1 pt-28 pb-20 px-4 sm:px-6 max-w-4xl mx-auto w-full">
-            {children}
-          </main>
+          <AppShell>{children}</AppShell>
         </TooltipProvider>
-
-        {/* Material 3 Expressive Footer */}
-        <Footer />
       </body>
     </html>
   );

@@ -11,9 +11,9 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "Home", href: "/" },
+  { label: "3D Rig", href: "/" },
   { label: "Projects", href: "/projects" },
-  { label: "About", href: "/about" },
+  { label: "Experience", href: "/about" },
   { label: "Notes", href: "/blogs" },
 ];
 
@@ -21,54 +21,58 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-      <nav
-        aria-label="Primary Navigation"
-        className={cn(
-          "pointer-events-auto flex items-center justify-between gap-4 sm:gap-8 px-4 py-2",
-          "rounded-full border border-[#C8C5D0]/40 bg-[#FAF9FD]/95 backdrop-blur-md",
-          "shadow-xs transition-all duration-200"
-        )}
-      >
-        {/* Brand / Logo */}
+    <header
+      data-print-hide="true"
+      className="fixed top-0 inset-x-0 z-50 border-b border-[#D5D1C5] bg-[#EFEDE6]/95 backdrop-blur-md"
+    >
+      <div className="max-w-5xl mx-auto px-3 sm:px-6 min-h-14 py-2 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 sm:gap-3">
         <Link
           href="/"
-          className="text-xs font-semibold tracking-tight text-[#1B1B1F] hover:text-[#5954A8] transition-colors shrink-0"
+          className="group flex items-center gap-2 text-xs font-mono tracking-tight text-[#141517] shrink-0"
         >
-          Sumukha Upadhyaya
+          <span
+            aria-hidden="true"
+            className="w-2 h-2 rounded-full bg-[#FF4F00] inline-block shrink-0"
+          />
+          <span className="font-semibold">Sumukha Upadhyaya</span>
         </Link>
 
-        {/* Navigation Links */}
-        <ul className="flex items-center gap-1 m-0 p-0 list-none">
-          {navItems.map((item) => {
-            const isActive =
-              item.href === "/"
-                ? pathname === "/"
-                : pathname === item.href || pathname.startsWith(`${item.href}/`);
+        <nav
+          aria-label="Primary Navigation"
+          className="order-3 sm:order-2 w-full sm:w-auto overflow-x-auto"
+        >
+          <ul className="flex items-center gap-1 m-0 p-0 list-none">
+            {navItems.map((item) => {
+              const isActive =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname === item.href ||
+                    pathname.startsWith(`${item.href}/`);
 
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "relative px-3 py-1 rounded-full text-xs font-medium transition-all duration-150",
-                    isActive
-                      ? "bg-[#E3DFFF] text-[#140E62] font-semibold"
-                      : "text-[#46464F] hover:text-[#1B1B1F] hover:bg-[#F4F2F7]"
-                  )}
-                >
-                  <span>{item.label}</span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+              return (
+                <li key={item.href} className="shrink-0">
+                  <Link
+                    href={item.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={cn(
+                      "te-btn inline-flex items-center px-2.5 sm:px-3 py-1.5 rounded-[5px] text-xs font-mono",
+                      isActive
+                        ? "bg-[#141517] text-[#FAF9F5] font-medium"
+                        : "text-[#52514C] hover:text-[#141517] hover:bg-[#E4E1D8]"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
 
-        {/* Resume Trigger */}
-        <div className="shrink-0">
+        <div className="order-2 sm:order-3 shrink-0">
           <ResumeModal />
         </div>
-      </nav>
+      </div>
     </header>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -8,23 +8,42 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { 
-  personalInfo, 
-  educationList, 
-  experienceList, 
-  projectList, 
-  leadershipRoles 
+import {
+  personalInfo,
+  educationList,
+  experienceList,
+  projectList,
+  leadershipRoles,
 } from "@/data/portfolio-data";
 
 export function ResumeModal() {
   const [copied, setCopied] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
+  const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(personalInfo.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current) {
+        clearTimeout(copyTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(personalInfo.email);
+      setCopied(true);
+      setStatusMessage(`Copied ${personalInfo.email} to clipboard.`);
+    } catch {
+      setStatusMessage(`Email address: ${personalInfo.email}`);
+    }
+
+    if (copyTimerRef.current) {
+      clearTimeout(copyTimerRef.current);
+    }
+    copyTimerRef.current = setTimeout(() => {
+      setCopied(false);
+    }, 2000);
   };
 
   const handlePrint = () => {
@@ -37,208 +56,221 @@ export function ResumeModal() {
         render={
           <button
             type="button"
-            className="flex items-center px-3 py-1.5 rounded-full text-xs font-mono font-medium text-[#140E62] bg-[#E3DFFF] hover:bg-[#D5CEFF] transition-all cursor-pointer shadow-xs"
+            className="te-btn inline-flex items-center gap-2 min-h-9 px-3 py-1.5 rounded-[6px] text-xs font-mono font-medium text-[#141517] bg-[#FAF9F5] border border-[#D5D1C5] hover:border-[#141517] cursor-pointer"
           >
+            <span
+              aria-hidden="true"
+              className="w-1.5 h-1.5 rounded-full bg-[#FF4F00]"
+            />
             <span>Resume</span>
           </button>
         }
       />
-      <DialogContent className="sm:max-w-3xl max-h-[88vh] overflow-y-auto bg-[#FAF8FD] border-[#C8C5D0]/40 text-[#1D1B20] p-6 sm:p-8 rounded-3xl shadow-xl">
-        <DialogHeader className="flex flex-col gap-2 border-b border-[#C8C5D0]/30 pb-5">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <DialogTitle className="text-2xl font-bold tracking-tight text-[#1D1B20] font-sans">
+      <DialogContent className="sm:max-w-3xl max-h-[88dvh] overflow-y-auto overscroll-contain bg-[#FAF9F5] border border-[#D5D1C5] text-[#141517] p-6 sm:p-8 pr-10 sm:pr-12 rounded-[8px] shadow-none">
+        <div role="status" aria-live="polite" className="sr-only">
+          {statusMessage}
+        </div>
+
+        <DialogHeader className="flex flex-col gap-3 border-b border-[#D5D1C5] pb-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pr-6">
+            <div className="min-w-0">
+              <DialogTitle className="text-2xl font-bold tracking-tight text-[#141517]">
                 {personalInfo.name}
               </DialogTitle>
-              <p className="text-xs font-mono text-[#5954A8] mt-1">
-                {personalInfo.title} • {personalInfo.location}
+              <p className="text-xs font-mono text-[#52514C] mt-1">
+                {personalInfo.title}, {personalInfo.location} (USN:{" "}
+                <span translate="no">{personalInfo.usn}</span>)
               </p>
             </div>
 
-            {/* Quick Action Toolbar */}
-            <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
+            <div
+              data-print-hide="true"
+              className="flex flex-wrap items-center gap-2 shrink-0"
+            >
+              <button
+                type="button"
                 onClick={handleCopyEmail}
-                className="h-8 rounded-full border-[#C8C5D0]/60 bg-[#FFFFFF] text-xs font-mono text-[#1D1B20] hover:bg-[#F4F2F8]"
+                className="te-btn min-h-9 px-3 py-1.5 rounded-[5px] border border-[#D5D1C5] bg-[#EFEDE6] text-xs font-mono text-[#141517] hover:border-[#141517] cursor-pointer"
               >
                 {copied ? "Copied" : "Copy Email"}
-              </Button>
+              </button>
 
-              <Button
-                variant="outline"
-                size="sm"
+              <button
+                type="button"
                 onClick={handlePrint}
-                className="h-8 rounded-full border-[#C8C5D0]/60 bg-[#FFFFFF] text-xs font-mono text-[#1D1B20] hover:bg-[#F4F2F8]"
+                className="te-btn min-h-9 px-3 py-1.5 rounded-[5px] bg-[#141517] text-[#FAF9F5] text-xs font-mono hover:bg-[#2F3437] cursor-pointer"
               >
-                Print / Save
-              </Button>
+                Print / Save PDF
+              </button>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#635F6A] pt-2">
-            <a href={`mailto:${personalInfo.email}`} className="hover:text-[#5954A8]">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-mono text-[#52514C] pt-1">
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="hover:text-[#141517] underline underline-offset-4"
+            >
               {personalInfo.email}
             </a>
-            <span className="text-[#C8C5D0]">/</span>
+            <span aria-hidden="true">/</span>
             <span>{personalInfo.phone}</span>
-            <span className="text-[#C8C5D0]">/</span>
-            <a href={personalInfo.github} target="_blank" rel="noreferrer" className="hover:text-[#5954A8]">
-              GitHub
+            <span aria-hidden="true">/</span>
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-[#141517] underline underline-offset-4"
+            >
+              GitHub ({personalInfo.githubHandle})
             </a>
-            <span className="text-[#C8C5D0]">/</span>
-            <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className="hover:text-[#5954A8]">
+            <span aria-hidden="true">/</span>
+            <a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-[#141517] underline underline-offset-4"
+            >
               LinkedIn
             </a>
-            <span className="text-[#C8C5D0]">/</span>
-            <a href={personalInfo.leetcode} target="_blank" rel="noreferrer" className="hover:text-[#5954A8]">
-              LeetCode
+            <span aria-hidden="true">/</span>
+            <a
+              href={personalInfo.leetcode}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-[#141517] underline underline-offset-4"
+            >
+              LeetCode ({personalInfo.leetcodeSolved})
             </a>
           </div>
         </DialogHeader>
 
-        {/* Resume Body */}
-        <div className="flex flex-col gap-8 py-4 text-xs sm:text-sm">
+        {/* Clean Specification Sections */}
+        <div className="divide-y divide-[#D5D1C5] text-xs sm:text-sm">
           {/* Education */}
-          <section className="flex flex-col gap-3">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-[#5954A8] font-bold">
-              Education
-            </h3>
-
-            <div className="flex flex-col gap-3">
+          <section className="py-5 flex flex-col gap-3">
+            <h3 className="text-sm font-bold text-[#141517]">Education</h3>
+            <div className="divide-y divide-[#E4E1D8]">
               {educationList.map((edu) => (
-                <div key={edu.institution} className="flex flex-col gap-1 p-4 rounded-2xl bg-[#F4F2F8] border border-[#C8C5D0]/20">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                    <span className="font-bold text-[#1D1B20]">{edu.institution}</span>
-                    <span className="text-xs font-mono text-[#635F6A]">{edu.timeline}</span>
+                <div
+                  key={edu.institution}
+                  className="py-2.5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1"
+                >
+                  <div className="min-w-0">
+                    <span className="font-semibold text-[#141517]">
+                      {edu.institution}
+                    </span>
+                    <span className="text-xs text-[#52514C] sm:ml-2 block sm:inline">
+                      {edu.degree}
+                    </span>
                   </div>
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-[#49454F]">
-                    <span>{edu.degree}</span>
-                    <span className="font-mono text-[#5954A8] font-semibold">{edu.grade}</span>
+                  <div className="flex items-center gap-3 font-mono text-xs shrink-0">
+                    <span className="text-[#B43900] font-bold">{edu.grade}</span>
+                    <span className="text-[#52514C]">{edu.timeline}</span>
                   </div>
-                  <ul className="mt-2 list-none p-0 flex flex-col gap-1 text-xs text-[#635F6A]">
-                    {edu.highlights.map((h, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#5954A8] mt-1.5 shrink-0" />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               ))}
             </div>
           </section>
 
           {/* Experience */}
-          <section className="flex flex-col gap-3">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-[#5954A8] font-bold">
+          <section className="py-5 flex flex-col gap-4">
+            <h3 className="text-sm font-bold text-[#141517]">
               Work Experience
             </h3>
-
-            <div className="flex flex-col gap-3">
+            <div className="divide-y divide-[#E4E1D8]">
               {experienceList.map((exp, idx) => (
-                <div key={idx} className="flex flex-col gap-2 p-4 rounded-2xl bg-[#F4F2F8] border border-[#C8C5D0]/20">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                    <span className="font-bold text-[#1D1B20]">{exp.company}</span>
-                    <span className="text-xs font-mono text-[#635F6A]">{exp.timeline}</span>
+                <div
+                  key={`${exp.company}-${idx}`}
+                  className="py-3.5 first:pt-0 last:pb-0 flex flex-col gap-2"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                    <div>
+                      <span className="font-bold text-[#141517]">
+                        {exp.company}
+                      </span>
+                      <span className="text-xs font-mono text-[#B43900] font-semibold sm:ml-2 block sm:inline">
+                        {exp.role}
+                      </span>
+                    </div>
+                    <span className="text-xs font-mono text-[#52514C]">
+                      {exp.timeline}
+                    </span>
                   </div>
-                  <span className="text-xs text-[#5954A8] font-semibold">{exp.role}</span>
-                  <ul className="mt-1 list-none p-0 flex flex-col gap-1.5 text-xs text-[#49454F] leading-relaxed">
+
+                  <ul className="list-none p-0 m-0 flex flex-col gap-1 text-xs text-[#141517]">
                     {exp.bullets.map((b, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#5954A8] mt-1.5 shrink-0" />
-                        <span>{b}</span>
+                      <li key={i} className="flex items-start gap-2 min-w-0">
+                        <span
+                          aria-hidden="true"
+                          className="font-mono text-[#B43900] select-none shrink-0"
+                        >
+                          –
+                        </span>
+                        <span className="leading-relaxed min-w-0">{b}</span>
                       </li>
                     ))}
                   </ul>
-                  <div className="flex flex-wrap gap-1.5 pt-2">
-                    {exp.techStack.map((tech) => (
-                      <span key={tech} className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#FFFFFF] border border-[#C8C5D0]/40 text-[#49454F]">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
                 </div>
               ))}
             </div>
           </section>
 
-          {/* Key Projects */}
-          <section className="flex flex-col gap-3">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-[#5954A8] font-bold">
-              Featured Technical Projects
+          {/* Selected Systems */}
+          <section className="py-5 flex flex-col gap-3">
+            <h3 className="text-sm font-bold text-[#141517]">
+              Selected Engineered Systems
             </h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="divide-y divide-[#E4E1D8]">
               {projectList.slice(0, 4).map((proj) => (
-                <div key={proj.slug} className="p-4 rounded-2xl bg-[#F4F2F8] border border-[#C8C5D0]/20 flex flex-col justify-between gap-2">
-                  <div className="flex flex-col gap-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-[#1D1B20]">{proj.title}</span>
-                      {proj.repoUrl && (
-                        <a href={proj.repoUrl} target="_blank" rel="noreferrer" className="text-xs font-mono text-[#5954A8] hover:underline">
-                          Source
-                        </a>
-                      )}
-                    </div>
-                    <p className="text-xs text-[#635F6A] leading-relaxed">{proj.description}</p>
+                <div
+                  key={proj.slug}
+                  className="py-3 first:pt-0 last:pb-0 flex flex-col gap-1"
+                >
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="font-bold text-[#141517]">
+                      {proj.title}
+                    </span>
+                    {proj.repoUrl && (
+                      <a
+                        href={proj.repoUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs font-mono text-[#52514C] hover:text-[#141517] underline shrink-0"
+                      >
+                        GitHub
+                      </a>
+                    )}
                   </div>
-                  <div className="flex flex-wrap gap-1 pt-1">
-                    {proj.techStack.slice(0, 4).map((tech) => (
-                      <span key={tech} className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#FFFFFF] border border-[#C8C5D0]/30 text-[#635F6A]">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="text-xs text-[#52514C] leading-relaxed">
+                    {proj.description}
+                  </p>
                 </div>
               ))}
             </div>
           </section>
 
-          {/* Technical Skills */}
-          <section className="flex flex-col gap-3">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-[#5954A8] font-bold">
-              Skills Matrix
+          {/* Leadership */}
+          <section className="pt-5 flex flex-col gap-3">
+            <h3 className="text-sm font-bold text-[#141517]">
+              Leadership &amp; Campus Roles
             </h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="p-4 rounded-2xl bg-[#F4F2F8] border border-[#C8C5D0]/20 flex flex-col gap-1.5">
-                <span className="text-xs font-mono font-semibold text-[#1D1B20]">Languages &amp; Core</span>
-                <p className="text-xs text-[#635F6A]">Java, Kotlin, Python, C/C++, JavaScript, TypeScript, Go, Rust, Bash, SQL, HTML/CSS</p>
-              </div>
-              <div className="p-4 rounded-2xl bg-[#F4F2F8] border border-[#C8C5D0]/20 flex flex-col gap-1.5">
-                <span className="text-xs font-mono font-semibold text-[#1D1B20]">Frameworks &amp; Runtimes</span>
-                <p className="text-xs text-[#635F6A]">React.js, Next.js (App Router), Node.js, Express, Flask, Spring Boot, Supabase, Tailwind CSS v4, Google Material 3</p>
-              </div>
-              <div className="p-4 rounded-2xl bg-[#F4F2F8] border border-[#C8C5D0]/20 flex flex-col gap-1.5">
-                <span className="text-xs font-mono font-semibold text-[#1D1B20]">Databases &amp; Cloud</span>
-                <p className="text-xs text-[#635F6A]">PostgreSQL, Google BigQuery, Firebase Firestore, MongoDB, MySQL, Redis, GCP, Kubernetes, Docker, Terraform</p>
-              </div>
-              <div className="p-4 rounded-2xl bg-[#F4F2F8] border border-[#C8C5D0]/20 flex flex-col gap-1.5">
-                <span className="text-xs font-mono font-semibold text-[#1D1B20]">Systems, Protocols &amp; Security</span>
-                <p className="text-xs text-[#635F6A]">Linux ptrace, System V ABI, gRPC, Protobuf, Wireshark, Burp Suite, Metasploit, Postman, WebXR, WebSockets</p>
-              </div>
-            </div>
-          </section>
-
-          {/* Organizational Leadership */}
-          <section className="flex flex-col gap-3">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-[#5954A8] font-bold">
-              Leadership &amp; Community Roles
-            </h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="divide-y divide-[#E4E1D8]">
               {leadershipRoles.map((role) => (
-                <div key={role.title} className="p-4 rounded-2xl bg-[#F4F2F8] border border-[#C8C5D0]/20 flex flex-col gap-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#1D1B20]">{role.title}</span>
-                    <Badge variant="outline" className="text-[10px] font-mono border-[#C8C5D0]/40 text-[#5954A8]">
+                <div
+                  key={role.title}
+                  className="py-2.5 first:pt-0 last:pb-0 flex flex-col gap-0.5"
+                >
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="font-semibold text-[#141517]">
+                      {role.title}
+                    </span>
+                    <span className="text-xs font-mono text-[#B43900] font-semibold shrink-0">
                       {role.roleType}
-                    </Badge>
+                    </span>
                   </div>
-                  <span className="text-[11px] font-mono text-[#635F6A]">{role.organization}</span>
-                  <p className="text-xs text-[#49454F] leading-relaxed mt-0.5">{role.description}</p>
+                  <span className="text-xs text-[#52514C]">
+                    {role.description}
+                  </span>
                 </div>
               ))}
             </div>

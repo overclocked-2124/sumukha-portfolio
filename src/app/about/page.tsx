@@ -1,43 +1,36 @@
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import type { Metadata } from "next";
 import { ResumeModal } from "@/components/resume-modal";
-import { 
-  personalInfo, 
-  educationList, 
-  experienceList, 
-  skillsData, 
-  leadershipRoles 
+import {
+  personalInfo,
+  educationList,
+  experienceList,
+  skillsData,
+  leadershipRoles,
+  personalHardwareSpecs,
 } from "@/data/portfolio-data";
 
-export default function AboutPage() {
-  const tenets = [
-    {
-      title: "First-Principles Rigor",
-      description: "Deconstructing systems to CPU instruction behavior, memory models, protocol invariants, and mathematical fundamentals before layering abstractions.",
-    },
-    {
-      title: "Zero-Allocation Discipline",
-      description: "In critical execution paths, eliminating heap allocations and garbage collection jitter through buffer reuse and memory-mapped state caches.",
-    },
-    {
-      title: "Tactile Ergonomics",
-      description: "Creating software interfaces that feel predictable, readable, and responsive. Thoughtful spatial cadence and calibrated design tokens turn tools into seamless workflows.",
-    },
-  ];
+export const metadata: Metadata = {
+  title: "Experience & Profile — Sumukha Upadhyaya",
+  description:
+    "Software engineering internships at Auxia and FindInbox, concurrent B.E. at RVCE (9.69 CGPA) and BS at IIT Madras (9.15 GPA), technical stack, and leadership.",
+};
 
+export default function AboutPage() {
   return (
-    <div className="flex flex-col gap-16 py-4">
-      {/* Page Header — Auxia-style split header */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 border-b border-[#C8C5D0]/30 pb-8 items-start">
-        <div className="flex flex-col gap-1">
-          <span className="text-xs font-mono text-[#5954A8] font-bold">ABOUT / PROFILE</span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1B1B1F] font-sans">
-            Sumukha Upadhyaya
+    <div className="flex flex-col gap-16 sm:gap-20 py-4">
+      {/* Page Header */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 border-b border-[#D5D1C5] pb-8 items-end">
+        <div className="md:col-span-6">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#141517] text-balance">
+            {personalInfo.name}
           </h1>
+          <p className="text-xs font-mono text-[#52514C] mt-1">
+            {personalInfo.title}, {personalInfo.location}
+          </p>
         </div>
-        <div className="md:col-span-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <p className="text-base text-[#46464F] leading-relaxed font-normal">
-            Software engineer and undergraduate student at RVCE and IIT Madras. Systems engineering, backend infrastructure, and web architectures.
+        <div className="md:col-span-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p className="text-sm sm:text-base text-[#52514C] leading-relaxed">
+            RVCE ISE (9.69 CGPA) and IIT Madras Data Science (9.15 GPA).
           </p>
           <div className="shrink-0">
             <ResumeModal />
@@ -45,262 +38,290 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Operator Narrative Card in M3 Surface Container */}
-      <Card className="rounded-3xl border-[#C8C5D0]/30 bg-white p-6 sm:p-8 shadow-xs flex flex-col gap-6">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-[#E3DFFF] flex items-center justify-center text-sm font-mono text-[#140E62] font-bold">
-            SU
-          </div>
-          <div>
-            <h2 className="text-xl font-bold text-[#1B1B1F] font-sans">{personalInfo.name}</h2>
-            <span className="text-xs font-mono text-[#5954A8]">@{personalInfo.githubHandle} • Systems &amp; Web Architectures</span>
-          </div>
-        </div>
-
-        <div className="space-y-4 text-sm sm:text-base text-[#46464F] leading-relaxed">
+      {/* Overview & Contact Specification */}
+      <section className="te-surface p-6 sm:p-8 flex flex-col gap-6">
+        <div className="space-y-4 text-sm sm:text-base text-[#141517] leading-relaxed max-w-[68ch] text-pretty">
           {personalInfo.bio.map((paragraph, idx) => (
             <p key={idx}>{paragraph}</p>
           ))}
         </div>
 
-        <div className="pt-4 border-t border-[#C8C5D0]/20 flex flex-wrap gap-6 text-xs font-mono text-[#635F6A]">
-          <div><span className="text-[#1B1B1F] font-semibold">Location:</span> {personalInfo.location}</div>
-          <div><span className="text-[#1B1B1F] font-semibold">Email:</span> <a href={`mailto:${personalInfo.email}`} className="text-[#5954A8] hover:underline">{personalInfo.email}</a></div>
-          <div><span className="text-[#1B1B1F] font-semibold">Phone:</span> {personalInfo.phone}</div>
-          <div><span className="text-[#1B1B1F] font-semibold">GitHub:</span> <a href={personalInfo.github} target="_blank" rel="noreferrer" className="text-[#5954A8] hover:underline">github.com/{personalInfo.githubHandle}</a></div>
-        </div>
-      </Card>
-
-      {/* Experience History */}
-      <section className="flex flex-col gap-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
-          <div className="flex flex-col gap-1">
-            <span className="text-xs font-mono text-[#5954A8] font-bold">WORK EXPERIENCE</span>
-            <h2 className="text-2xl font-bold tracking-tight text-[#1B1B1F] font-sans">Industry Experience</h2>
-          </div>
-          <div className="md:col-span-2">
-            <p className="text-sm text-[#46464F] leading-relaxed">
-              Engineering internships at Auxia and FindInbox focused on live production rollouts, access control, and BigQuery data pipelines.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-4">
-          {experienceList.map((exp, idx) => (
-            <Card
-              key={idx}
-              className="p-6 rounded-3xl border-[#C8C5D0]/30 bg-white shadow-xs flex flex-col gap-4"
+        <div className="pt-5 border-t border-[#D5D1C5] flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono text-[#52514C]">
+          <div>
+            <span className="text-[#141517] font-semibold">Email:</span>{" "}
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="hover:text-[#B43900] underline underline-offset-4"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#C8C5D0]/20 pb-3">
+              {personalInfo.email}
+            </a>
+          </div>
+          <div>
+            <span className="text-[#141517] font-semibold">Phone:</span>{" "}
+            {personalInfo.phone}
+          </div>
+          <div>
+            <span className="text-[#141517] font-semibold">GitHub:</span>{" "}
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-[#B43900] underline underline-offset-4"
+            >
+              github.com/{personalInfo.githubHandle}
+            </a>
+          </div>
+          <div>
+            <span className="text-[#141517] font-semibold">LinkedIn:</span>{" "}
+            <a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-[#B43900] underline underline-offset-4"
+            >
+              /in/sumukhaupadhyaya
+            </a>
+          </div>
+          <div>
+            <span className="text-[#141517] font-semibold">LeetCode:</span>{" "}
+            <a
+              href={personalInfo.leetcode}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-[#B43900] underline underline-offset-4"
+            >
+              {personalInfo.leetcodeSolved}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Work Experience */}
+      <section className="flex flex-col gap-6">
+        <div className="border-b border-[#D5D1C5] pb-4">
+          <h2 className="text-2xl font-bold tracking-tight text-[#141517]">
+            Work Experience
+          </h2>
+          <p className="text-sm text-[#52514C] mt-1">
+            Software engineering internships across Auxia and FindInbox.
+          </p>
+        </div>
+
+        <div className="te-surface divide-y divide-[#D5D1C5]">
+          {experienceList.map((exp, idx) => (
+            <article
+              key={`${exp.company}-${idx}`}
+              className="p-6 sm:p-8 flex flex-col gap-4"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
                 <div>
-                  <h3 className="text-lg font-bold text-[#1B1B1F]">{exp.company}</h3>
-                  <span className="text-xs font-mono text-[#5954A8] font-semibold">{exp.role}</span>
+                  <h3 className="text-lg font-bold text-[#141517]">
+                    {exp.company}
+                  </h3>
+                  <span className="text-xs font-mono text-[#B43900] font-semibold">
+                    {exp.role}
+                  </span>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-mono text-[#635F6A]">
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#F4F2F7] border border-[#C8C5D0]/40">{exp.timeline}</span>
-                  <span className="text-[#C8C5D0]">/</span>
-                  <span>{exp.type}</span>
-                </div>
+                <span className="text-xs font-mono text-[#52514C]">
+                  {exp.timeline}
+                </span>
               </div>
 
-              <ul className="list-none p-0 m-0 flex flex-col gap-2 text-xs sm:text-sm text-[#46464F] leading-relaxed">
+              <ul className="list-none p-0 m-0 flex flex-col gap-2 text-xs sm:text-sm text-[#141517] leading-relaxed max-w-[68ch]">
                 {exp.bullets.map((bullet, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#5954A8] mt-2 shrink-0" />
-                    <span>{bullet}</span>
+                  <li key={i} className="flex items-start gap-2.5 min-w-0">
+                    <span
+                      aria-hidden="true"
+                      className="font-mono text-[#B43900] select-none shrink-0"
+                    >
+                      –
+                    </span>
+                    <span className="min-w-0">{bullet}</span>
                   </li>
                 ))}
               </ul>
 
-              <div className="flex flex-wrap gap-1.5 pt-2">
+              <div className="flex flex-wrap gap-1.5 pt-1">
                 {exp.techStack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-[11px] font-mono text-[#46464F] bg-[#F4F2F7] border border-[#C8C5D0]/30 px-2.5 py-0.5 rounded-full"
-                  >
+                  <span key={tech} translate="no" className="te-kbd">
                     {tech}
                   </span>
                 ))}
               </div>
-            </Card>
+            </article>
           ))}
         </div>
       </section>
 
-      {/* Education Section */}
+      {/* Education */}
       <section className="flex flex-col gap-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
-          <div className="flex flex-col gap-1">
-            <span className="text-xs font-mono text-[#5954A8] font-bold">ACADEMIC FOUNDATION</span>
-            <h2 className="text-2xl font-bold tracking-tight text-[#1B1B1F] font-sans">Education &amp; Credentials</h2>
-          </div>
-          <div className="md:col-span-2">
-            <p className="text-sm text-[#46464F] leading-relaxed">
-              Dual academic tracks covering systems engineering, computer architecture, data science, and mathematical foundations.
-            </p>
-          </div>
+        <div className="border-b border-[#D5D1C5] pb-4">
+          <h2 className="text-2xl font-bold tracking-tight text-[#141517]">
+            Education
+          </h2>
+          <p className="text-sm text-[#52514C] mt-1">
+            Concurrent undergraduate degrees at RVCE Bengaluru and IIT Madras.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="te-surface divide-y divide-[#D5D1C5]">
           {educationList.map((edu) => (
-            <Card
+            <div
               key={edu.institution}
-              className="flex flex-col justify-between p-6 rounded-3xl border-[#C8C5D0]/30 bg-white shadow-xs"
+              className="p-6 sm:p-8 flex flex-col gap-3"
             >
-              <div className="flex flex-col gap-2.5">
-                <div className="flex items-center justify-between text-xs font-mono text-[#635F6A]">
-                  <span>{edu.timeline}</span>
-                  <Badge variant="outline" className="border-[#C7BFFF]/40 bg-[#E3DFFF] text-[#140E62] text-[10px] font-bold">
-                    {edu.grade}
-                  </Badge>
+              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                <div>
+                  <h3 className="text-lg font-bold text-[#141517]">
+                    {edu.institution}
+                  </h3>
+                  <span className="text-xs font-mono text-[#52514C]">
+                    {edu.degree}
+                  </span>
                 </div>
-                <h3 className="text-base font-bold text-[#1B1B1F] leading-snug">{edu.institution}</h3>
-                <span className="text-xs font-mono text-[#5954A8] font-medium">{edu.degree}</span>
-                <p className="text-xs text-[#46464F] leading-relaxed mt-1">{edu.details}</p>
+                <div className="flex items-center gap-3 font-mono text-xs shrink-0">
+                  <span className="text-[#B43900] font-bold">{edu.grade}</span>
+                  <span className="text-[#52514C]">{edu.timeline}</span>
+                </div>
               </div>
 
-              <ul className="mt-4 pt-4 border-t border-[#C8C5D0]/20 list-none p-0 flex flex-col gap-1.5 text-xs text-[#635F6A]">
+              <p className="text-sm text-[#141517] leading-relaxed max-w-[68ch] text-pretty">
+                {edu.details}
+              </p>
+
+              <ul className="list-none p-0 m-0 flex flex-col gap-1 text-xs sm:text-sm text-[#52514C]">
                 {edu.highlights.map((h, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#5954A8] mt-1.5 shrink-0" />
-                    <span>{h}</span>
+                  <li key={i} className="flex items-start gap-2 min-w-0">
+                    <span
+                      aria-hidden="true"
+                      className="font-mono text-[#B43900] select-none shrink-0"
+                    >
+                      –
+                    </span>
+                    <span className="min-w-0">{h}</span>
                   </li>
                 ))}
               </ul>
-            </Card>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* Leadership & Organization Roles */}
-      <section className="flex flex-col gap-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
-          <div className="flex flex-col gap-1">
-            <span className="text-xs font-mono text-[#5954A8] font-bold">LEADERSHIP &amp; COMMUNITY</span>
-            <h2 className="text-2xl font-bold tracking-tight text-[#1B1B1F] font-sans">Campus &amp; Community Roles</h2>
-          </div>
-          <div className="md:col-span-2">
-            <p className="text-sm text-[#46464F] leading-relaxed">
-              Leading campus-wide hackathons, cybersecurity capture-the-flag competitions, and engineering mentorship initiatives.
-            </p>
-          </div>
+      {/* Technical Stack */}
+      <section id="stack" className="flex flex-col gap-6 scroll-mt-24">
+        <div className="border-b border-[#D5D1C5] pb-4">
+          <h2 className="text-2xl font-bold tracking-tight text-[#141517]">
+            Technical Stack
+          </h2>
+          <p className="text-sm text-[#52514C] mt-1">
+            Core languages, systems protocols, databases, and verification tools.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {leadershipRoles.map((role) => (
-            <Card
-              key={role.title}
-              className="p-5 rounded-3xl border-[#C8C5D0]/30 bg-white shadow-xs flex flex-col justify-between gap-3"
-            >
-              <div className="flex flex-col gap-1.5">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-bold text-[#1B1B1F]">{role.title}</h3>
-                  <Badge variant="outline" className="text-[10px] font-mono border-[#C8C5D0]/40 bg-[#F4F2F7] text-[#5954A8]">
-                    {role.roleType}
-                  </Badge>
-                </div>
-                <span className="text-xs font-mono text-[#635F6A]">{role.organization}</span>
-                <p className="text-xs text-[#46464F] leading-relaxed mt-1">{role.description}</p>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Engineering Tenets */}
-      <section className="flex flex-col gap-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
-          <div className="flex flex-col gap-1">
-            <span className="text-xs font-mono text-[#5954A8] font-bold">PHILOSOPHY</span>
-            <h2 className="text-2xl font-bold tracking-tight text-[#1B1B1F] font-sans">Engineering Tenets</h2>
-          </div>
-          <div className="md:col-span-2">
-            <p className="text-sm text-[#46464F] leading-relaxed">
-              Core design invariants that guide architectural decisions across low-level codebases and user-facing applications.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {tenets.map((t) => (
-            <Card key={t.title} className="p-6 rounded-3xl border-[#C8C5D0]/30 bg-white shadow-xs flex flex-col gap-2.5">
-              <h3 className="text-sm font-bold text-[#1B1B1F]">{t.title}</h3>
-              <p className="text-xs text-[#46464F] leading-relaxed">{t.description}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Technical Competencies Matrix */}
-      <section className="flex flex-col gap-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#C8C5D0]/30 pb-6">
-          <div className="flex flex-col gap-1">
-            <span className="text-xs font-mono text-[#5954A8] font-bold">COMPETENCIES</span>
-            <h2 className="text-2xl font-bold tracking-tight text-[#1B1B1F] font-sans">Technical Domain Matrix</h2>
-          </div>
-          <div className="md:col-span-2">
-            <p className="text-sm text-[#46464F] leading-relaxed">
-              Languages, runtimes, distributed protocols, databases, and verification tools utilized in production and research.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {/* Languages */}
-          <Card className="p-6 rounded-3xl border-[#C8C5D0]/30 bg-white shadow-xs flex flex-col gap-3">
-            <span className="text-xs font-mono text-[#5954A8] uppercase tracking-widest font-bold">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="te-surface p-6 flex flex-col gap-3">
+            <h3 className="text-base font-bold text-[#141517]">
               Languages &amp; Runtimes
-            </span>
-            <div className="flex flex-col gap-2">
+            </h3>
+            <dl className="divide-y divide-[#E4E1D8] text-xs sm:text-sm">
               {skillsData.languages.map((l) => (
-                <div key={l.name} className="flex items-center justify-between text-xs py-1.5 border-b border-[#C8C5D0]/15 last:border-none">
-                  <span className="font-semibold text-[#1B1B1F]">{l.name}</span>
-                  <span className="font-mono text-[#635F6A]">{l.desc}</span>
+                <div
+                  key={l.name}
+                  className="py-2.5 flex items-baseline justify-between gap-3"
+                >
+                  <dt className="font-semibold text-[#141517]">{l.name}</dt>
+                  <dd className="font-mono text-xs text-[#52514C] text-right">
+                    {l.desc}
+                  </dd>
                 </div>
               ))}
+            </dl>
+          </div>
+
+          <div className="te-surface p-6 flex flex-col justify-between gap-6">
+            <div className="flex flex-col gap-2.5">
+              <h3 className="text-base font-bold text-[#141517]">
+                Systems, Protocols &amp; Security
+              </h3>
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  ...skillsData.systemsAndProtocols,
+                  ...skillsData.securityAndTools,
+                ].map((item) => (
+                  <span key={item} translate="no" className="te-kbd">
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
-          </Card>
 
-          {/* Frameworks & Databases */}
-          <div className="flex flex-col gap-5">
-            <Card className="p-5 rounded-3xl border-[#C8C5D0]/30 bg-white shadow-xs flex flex-col gap-2.5">
-              <span className="text-xs font-mono text-[#5954A8] uppercase tracking-widest font-bold">
-                Frameworks &amp; Web Architectures
-              </span>
+            <div className="flex flex-col gap-2.5 pt-4 border-t border-[#E4E1D8]">
+              <h3 className="text-base font-bold text-[#141517]">
+                Databases, Cloud &amp; Web
+              </h3>
               <div className="flex flex-wrap gap-1.5">
-                {skillsData.frameworksAndLibs.map((f) => (
-                  <span key={f} className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#F4F2F7] border border-[#C8C5D0]/30 text-[#49454F]">
-                    {f}
-                  </span>
-                ))}
-              </div>
-            </Card>
-
-            <Card className="p-5 rounded-3xl border-[#C8C5D0]/30 bg-white shadow-xs flex flex-col gap-2.5">
-              <span className="text-xs font-mono text-[#7A5368] uppercase tracking-widest font-bold">
-                Databases &amp; Cloud Infrastructure
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {[...skillsData.databases, ...skillsData.cloudAndInfra].map((item) => (
-                  <span key={item} className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#F4F2F7] border border-[#C8C5D0]/30 text-[#49454F]">
+                {[
+                  ...skillsData.databases,
+                  ...skillsData.cloudAndInfra,
+                  ...skillsData.frameworksAndLibs.slice(0, 6),
+                ].map((item) => (
+                  <span key={item} translate="no" className="te-kbd">
                     {item}
                   </span>
                 ))}
               </div>
-            </Card>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <Card className="p-5 rounded-3xl border-[#C8C5D0]/30 bg-white shadow-xs flex flex-col gap-2.5">
-              <span className="text-xs font-mono text-[#5954A8] uppercase tracking-widest font-bold">
-                Systems, Security &amp; Protocols
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {[...skillsData.systemsAndProtocols, ...skillsData.securityAndTools].map((item) => (
-                  <span key={item} className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#F4F2F7] border border-[#C8C5D0]/30 text-[#49454F]">
-                    {item}
+      {/* Leadership & Personal */}
+      <section id="field-spec" className="flex flex-col gap-6 scroll-mt-24">
+        <div className="border-b border-[#D5D1C5] pb-4">
+          <h2 className="text-2xl font-bold tracking-tight text-[#141517]">
+            Leadership &amp; Personal
+          </h2>
+          <p className="text-sm text-[#52514C] mt-1">
+            Campus technical leadership, Shotokan Karate, and hardware roots.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div className="lg:col-span-7 te-surface divide-y divide-[#D5D1C5]">
+            {leadershipRoles.map((role) => (
+              <div key={role.title} className="p-5 sm:p-6 flex flex-col gap-1">
+                <div className="flex items-baseline justify-between gap-2">
+                  <h3 className="text-base font-bold text-[#141517]">
+                    {role.title}
+                  </h3>
+                  <span className="text-xs font-mono text-[#B43900] font-semibold shrink-0">
+                    {role.roleType}
                   </span>
-                ))}
+                </div>
+                <span className="text-xs font-mono text-[#52514C]">
+                  {role.organization}
+                </span>
+                <p className="text-xs sm:text-sm text-[#141517] leading-relaxed mt-1">
+                  {role.description}
+                </p>
               </div>
-            </Card>
+            ))}
+          </div>
+
+          <div className="lg:col-span-5 te-surface divide-y divide-[#D5D1C5]">
+            {personalHardwareSpecs.map((spec) => (
+              <div key={spec.label} className="p-5 flex flex-col gap-1">
+                <div className="flex items-baseline justify-between gap-2 text-xs font-mono">
+                  <span className="text-[#52514C]">{spec.label}</span>
+                  <span className="text-[#141517] font-semibold text-right">
+                    {spec.value}
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-[#52514C] leading-relaxed">
+                  {spec.detail}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

@@ -1,170 +1,215 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { gardenNotes, GardenNote } from "@/data/portfolio-data";
+import { gardenNotes, type GardenNote } from "@/data/portfolio-data";
+
+const CATEGORIES = ["All", "Systems", "Security", "Architecture"] as const;
 
 export function GardenClientView() {
-  const [selectedStage, setSelectedStage] = useState<string>("All");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const stages = ["All", "Seedling", "Budding", "Evergreen"];
-  const categories = ["All", "Systems", "Security", "Architecture", "Design"];
+  const syncUrlParams = useCallback((cat: string, query: string) => {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    if (cat && cat !== "All") {
+      url.searchParams.set("category", cat);
+    } else {
+      url.searchParams.delete("category");
+    }
+    if (query.trim()) {
+      url.searchParams.set("q", query.trim());
+    } else {
+      url.searchParams.delete("q");
+    }
+    window.history.replaceState(null, "", `${url.pathname}${url.search}`);
+  }, []);
+
+  useEffect(() => {
+    const readFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      const catParam = params.get("category");
+      const qParam = params.get("q") ?? "";
+      if (
+        catParam &&
+        CATEGORIES.includes(catParam as (typeof CATEGORIES)[number])
+      ) {
+        setSelectedCategory(catParam);
+      } else {
+        setSelectedCategory("All");
+      }
+      setSearchQuery(qParam);
+    };
+    readFromUrl();
+    window.addEventListener("popstate", readFromUrl);
+    return () => window.removeEventListener("popstate", readFromUrl);
+  }, []);
+
+  const handleCategoryChange = (cat: string) => {
+    setSelectedCategory(cat);
+    syncUrlParams(cat, searchQuery);
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    syncUrlParams(selectedCategory, value);
+  };
+
+  const handleReset = () => {
+    setSelectedCategory("All");
+    setSearchQuery("");
+    syncUrlParams("All", "");
+  };
 
   const filteredNotes = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
     return gardenNotes.filter((note) => {
-      const matchesStage = selectedStage === "All" || note.stage === selectedStage;
-      const matchesCategory = selectedCategory === "All" || note.category === selectedCategory;
+      const matchesCategory =
+        selectedCategory === "All" || note.category === selectedCategory;
 
       const matchesSearch =
-        searchQuery.trim() === "" ||
-        note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        note.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        note.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
+        q === "" ||
+        note.title.toLowerCase().includes(q) ||
+        note.excerpt.toLowerCase().includes(q) ||
+        note.tags.some((t) => t.toLowerCase().includes(q));
 
-      return matchesStage && matchesCategory && matchesSearch;
+      return matchesCategory && matchesSearch;
     });
-  }, [selectedStage, selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery]);
 
-  const getStageColor = (stage: GardenNote["stage"]) => {
+  const getStageBadgeClass = (stage: GardenNote["stage"]) => {
     switch (stage) {
-      case "Seedling":
-        return "border-[#85D49B]/40 bg-[#D2E7D6] text-[#0F381E]";
-      case "Budding":
-        return "border-[#FFB77D]/40 bg-[#FFDCC1] text-[#2E1500]";
       case "Evergreen":
-        return "border-[#C7BFFF]/40 bg-[#E3DFFF] text-[#140E62]";
+        return "badge-pastel-green";
+      case "Budding":
+        return "badge-pastel-yellow";
+      default:
+        return "badge-pastel-blue";
     }
   };
 
   return (
-    <div className="flex flex-col gap-8">
-      {/* Filter and Search Bar in M3 Surface Container */}
-      <div className="flex flex-col gap-4 p-5 rounded-3xl border border-[#C8C5D0]/30 bg-white shadow-xs">
-        {/* Stage Filter */}
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono text-[#635F6A] mr-1">
-              GROWTH STAGE:
-            </span>
-            {stages.map((stage) => (
-              <button
-                key={stage}
-                type="button"
-                onClick={() => setSelectedStage(stage)}
-                className={`px-3.5 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
-                  selectedStage === stage
-                    ? "bg-[#E3DFFF] text-[#140E62] border border-[#C7BFFF]/60 font-semibold shadow-xs"
-                    : "bg-[#F4F2F8] text-[#49454F] border border-[#C8C5D0]/30 hover:bg-[#EEEBF2] hover:text-[#1D1B20]"
-                }`}
-              >
-                {stage}
-              </button>
-            ))}
-          </div>
-
-          {/* Search Box */}
-          <div className="w-full sm:w-64">
-            <Input
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search notes & tags..."
-              className="h-9 text-xs font-mono bg-[#FAF8FD] border-[#C8C5D0]/40 text-[#1D1B20] rounded-full focus-visible:ring-[#5954A8] px-4"
-            />
-          </div>
-        </div>
-
-        {/* Category Pills */}
-        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#C8C5D0]/20 text-xs font-mono">
-          <span className="text-[#635F6A] mr-1">TOPIC:</span>
-          {categories.map((cat) => (
+    <div className="flex flex-col gap-6">
+      {/* Control Bar */}
+      <div className="te-surface p-3.5 sm:p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div
+          role="group"
+          aria-label="Filter notes by category"
+          className="flex flex-wrap items-center gap-1.5"
+        >
+          {CATEGORIES.map((cat) => (
             <button
               key={cat}
               type="button"
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-2.5 py-0.5 rounded-full text-[11px] font-mono transition-all cursor-pointer ${
+              aria-pressed={selectedCategory === cat}
+              onClick={() => handleCategoryChange(cat)}
+              className={`te-btn min-h-9 px-3 py-1.5 rounded-[5px] text-xs font-mono cursor-pointer ${
                 selectedCategory === cat
-                  ? "bg-[#E3DFFF] text-[#140E62] font-semibold"
-                  : "text-[#635F6A] hover:bg-[#F4F2F8] hover:text-[#1D1B20]"
+                  ? "bg-[#141517] text-[#FAF9F5] font-medium"
+                  : "bg-[#EFEDE6] text-[#52514C] border border-[#D5D1C5] hover:text-[#141517] hover:border-[#141517]"
               }`}
             >
               {cat}
             </button>
           ))}
         </div>
+
+        <div className="w-full sm:w-64">
+          <label htmlFor="notes-filter-input" className="sr-only">
+            Search engineering notes and tags
+          </label>
+          <Input
+            id="notes-filter-input"
+            name="notesQuery"
+            type="search"
+            autoComplete="off"
+            value={searchQuery}
+            onChange={(e) => handleSearchChange(e.target.value)}
+            placeholder="Search notes & tags…"
+            className="h-9 text-base sm:text-sm font-mono bg-[#EFEDE6] border-[#D5D1C5] text-[#141517] rounded-[5px] focus-visible:ring-[#B43900] px-3"
+          />
+        </div>
       </div>
 
-      {/* Notes Count */}
-      <div className="flex items-center justify-between text-xs font-mono text-[#635F6A] px-1">
-        <span>SHOWING {filteredNotes.length} OF {gardenNotes.length} NOTES</span>
-        <span>CATEGORIZED BY MATURITY &amp; TOPIC</span>
+      {/* Persistent live count for accessibility */}
+      <div
+        role="status"
+        aria-live="polite"
+        className="text-xs font-mono text-[#52514C]"
+      >
+        Showing {filteredNotes.length} of {gardenNotes.length} engineering notes
       </div>
 
-      {/* Notes Stream */}
-      <div className="flex flex-col gap-5">
-        {filteredNotes.map((note) => (
-          <Link
-            key={note.slug}
-            href={`/blogs/${note.slug}`}
-            className="group block"
+      {/* Empty State */}
+      {filteredNotes.length === 0 ? (
+        <div className="te-surface p-12 text-center flex flex-col items-center gap-3">
+          <span className="text-xs font-mono text-[#B43900] font-semibold">
+            No matching note
+          </span>
+          <p className="text-sm text-[#52514C] max-w-md text-pretty">
+            No engineering notes matched your filter criteria.
+          </p>
+          <button
+            type="button"
+            onClick={handleReset}
+            className="te-btn mt-2 min-h-9 px-3.5 py-1.5 rounded-[5px] bg-[#141517] text-[#FAF9F5] text-xs font-mono cursor-pointer"
           >
-            <Card className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 rounded-3xl border-[#C8C5D0]/30 bg-white p-6 hover:shadow-md transition-all duration-200">
-              <div className="flex flex-col gap-3 max-w-2xl">
-                <div className="flex flex-wrap items-center gap-2.5 text-xs">
-                  <Badge
-                    variant="outline"
-                    className={`rounded-full px-2.5 py-0.5 text-[11px] font-mono ${getStageColor(
+            Reset Filters
+          </button>
+        </div>
+      ) : (
+        <div className="te-surface divide-y divide-[#D5D1C5]">
+          {filteredNotes.map((note) => (
+            <Link
+              key={note.slug}
+              href={`/blogs/${note.slug}`}
+              className="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 group hover:bg-[#E4E1D8]/40 transition-colors duration-150 ease-out"
+            >
+              <div className="flex flex-col gap-2.5 max-w-2xl min-w-0">
+                <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono text-[#52514C]">
+                  <span className="text-[#B43900] font-semibold">
+                    {note.category}
+                  </span>
+                  <span
+                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${getStageBadgeClass(
                       note.stage
                     )}`}
                   >
                     {note.stage}
-                  </Badge>
-                  <span className="text-[#49454F] font-mono text-[11px]">
-                    {note.category}
                   </span>
-                  <span className="text-[#C8C5D0]">/</span>
-                  <span className="text-[#635F6A] font-mono text-[11px]">
-                    {note.date}
-                  </span>
-                  <span className="text-[#C8C5D0]">/</span>
-                  <span className="text-[#635F6A] font-mono text-[11px]">
-                    {note.readTime}
-                  </span>
+                  <span>{note.date}</span>
+                  <span aria-hidden="true">/</span>
+                  <span>{note.readTime}</span>
                 </div>
 
-                <h2 className="text-lg sm:text-xl font-bold text-[#1D1B20] group-hover:text-[#5954A8] transition-colors leading-snug font-sans">
+                <h2 className="text-lg sm:text-xl font-bold text-[#141517] group-hover:text-[#B43900] transition-colors duration-150 ease-out leading-snug text-balance">
                   {note.title}
                 </h2>
 
-                <p className="text-sm text-[#49454F] leading-relaxed">
+                <p className="text-sm sm:text-base text-[#141517] leading-relaxed text-pretty">
                   {note.excerpt}
                 </p>
 
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   {note.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="text-[10px] font-mono text-[#635F6A] bg-[#F4F2F8] border border-[#C8C5D0]/30 px-2.5 py-0.5 rounded-full"
-                    >
-                      #{t}
+                    <span key={t} translate="no" className="te-kbd">
+                      {t}
                     </span>
                   ))}
                 </div>
               </div>
 
               <div className="sm:self-center shrink-0">
-                <div className="inline-flex items-center text-xs font-mono text-[#5954A8] group-hover:underline px-3.5 py-1.5 rounded-full bg-[#F4F2F8]">
-                  <span>Read note &rarr;</span>
-                </div>
+                <span className="te-btn inline-flex items-center px-3.5 py-1.5 rounded-[5px] bg-[#EFEDE6] border border-[#D5D1C5] group-hover:border-[#141517] text-xs font-mono text-[#141517] font-medium">
+                  Read Article
+                </span>
               </div>
-            </Card>
-          </Link>
-        ))}
-      </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
